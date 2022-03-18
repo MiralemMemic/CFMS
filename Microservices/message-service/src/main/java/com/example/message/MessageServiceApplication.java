@@ -19,16 +19,5 @@ public class MessageServiceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Message message = new Message();
-		message.setReceiver(1);
-		message.setSender(2);
-		message.setContent("Hello");
-		messageRepository.save(message);
-
-		Message message1 = new Message();
-		message1.setReceiver(3);
-		message1.setSender(4);
-		message1.setContent("Hello V2");
-		messageRepository.save(message1);
 	}
 }
