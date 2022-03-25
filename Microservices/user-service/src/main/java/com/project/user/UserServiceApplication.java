@@ -17,7 +17,7 @@ public class UserServiceApplication implements CommandLineRunner {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
-/*	@Autowired
+	@Autowired
 	private UserRepository userRepository;
 
 	@Override
@@ -39,7 +39,7 @@ public class UserServiceApplication implements CommandLineRunner {
 		user1.setEmail("komic@hotmail.com");
 		user1.setRole("warden");
 		userRepository.save(user1);
-	} */
+	}
 
 
 	@Bean

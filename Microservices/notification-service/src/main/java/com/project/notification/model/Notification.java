@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -18,9 +19,11 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @Column(name= "jail")
     private int jail;
 
+    @NotBlank(message =  "The notification can't be blank")
     @Column(name = "text")
     private String text;
 

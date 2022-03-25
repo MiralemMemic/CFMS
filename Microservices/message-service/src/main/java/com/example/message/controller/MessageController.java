@@ -6,9 +6,15 @@ import com.example.message.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -24,8 +30,9 @@ public class MessageController {
     }
 
     @PostMapping
-    public Message createMessage(@RequestBody Message message){
-        return messageRepository.save(message);
+    public ResponseEntity<String> createMessage( @RequestBody @Valid Message message){
+        messageRepository.save(message);
+        return ResponseEntity.ok("Message sent");
     }
 
     @GetMapping("{id}")
@@ -40,4 +47,23 @@ public class MessageController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            org.springframework.web.bind.MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage;
+            if(fieldName.equals("receiver")) {
+                errorMessage = "User can't be null or 0";
+            }else{
+                errorMessage = error.getDefaultMessage();
+            }
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
+    }
+
 }
