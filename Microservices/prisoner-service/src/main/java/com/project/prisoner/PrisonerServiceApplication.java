@@ -2,12 +2,14 @@ package com.project.prisoner;
 
 import com.project.prisoner.model.Prisoner;
 import com.project.prisoner.repository.PrisonerRepository;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@OpenAPIDefinition
 public class PrisonerServiceApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
