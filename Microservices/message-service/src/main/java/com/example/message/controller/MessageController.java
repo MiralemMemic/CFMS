@@ -3,6 +3,7 @@ package com.example.message.controller;
 import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
+import com.example.message.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,48 +23,33 @@ import java.util.Map;
 public class MessageController {
 
     @Autowired
-    private MessageRepository messageRepository;
+    private MessageService messageService;
 
     @GetMapping
     public List<Message> getAllMessages(){
-        return messageRepository.findAll();
+        return messageService.getAllMessages();
     }
 
     @PostMapping
     public ResponseEntity<String> createMessage( @RequestBody @Valid Message message){
-        messageRepository.save(message);
-        return ResponseEntity.ok("Message sent");
+        return messageService.createMessage(message);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Message> getMessageById(@PathVariable long id){
-        Message message = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
-        return ResponseEntity.ok(message);
+        return messageService.getMessageById(id);
     }
 
-    public ResponseEntity<Message> deleteMessage(long id){
-        Message message = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
-        messageRepository.delete(message);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("{id}")
+    public ResponseEntity<HttpStatus> deleteMessage(@PathVariable long id){
+        return messageService.deleteMessage(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             org.springframework.web.bind.MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage;
-            if(fieldName.equals("receiver")) {
-                errorMessage = "User can't be null or 0";
-            }else{
-                errorMessage = error.getDefaultMessage();
-            }
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
+        return messageService.handleValidationExceptions(ex);
     }
 
 }

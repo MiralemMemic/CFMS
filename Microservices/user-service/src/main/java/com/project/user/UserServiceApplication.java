@@ -2,6 +2,7 @@ package com.project.user;
 
 import com.project.user.model.User;
 import com.project.user.repository.UserRepository;
+import com.project.user.service.UserService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +14,12 @@ import org.springframework.context.annotation.Bean;
 @OpenAPIDefinition
 public class UserServiceApplication implements CommandLineRunner {
 
+	@Bean
+	public UserService getUserService(){
+		return new UserService();
+	}
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
@@ -20,8 +27,11 @@ public class UserServiceApplication implements CommandLineRunner {
 	@Autowired
 	private UserRepository userRepository;
 
+
 	@Override
 	public void run(String... args) throws Exception {
+
+
 		User user = new User();
 		user.setFirstName("Miralem");
 		user.setLastName("Memic");

@@ -3,6 +3,7 @@ package com.project.notification.controller;
 import com.project.notification.exception.ResourceNotFoundException;
 import com.project.notification.model.Notification;
 import com.project.notification.repository.NotificationRepository;
+import com.project.notification.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,42 +22,32 @@ import java.util.Map;
 public class NotificationController {
 
     @Autowired
-    private NotificationRepository notificationRepository;
+    private NotificationService notificationService;
 
     @GetMapping
-    public List<Notification> getAllMessages(){
-        return notificationRepository.findAll();
+    public List<Notification> getAllNotifications(){
+        return notificationService.getAllNotifications();
     }
 
     @PostMapping
-    public Notification createMessage(@RequestBody @Valid Notification message){
+    public Notification createNotification(@RequestBody @Valid Notification message){
 
-        return notificationRepository.save(message);
+        return notificationService.createNotification(message);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Notification> getMessageById(@PathVariable long id){
-        Notification message = notificationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
-        return ResponseEntity.ok(message);
+    public ResponseEntity<Notification> getNotificationById(@PathVariable long id){
+        return notificationService.getNotificationById(id);
     }
-
-    public ResponseEntity<Notification> deleteMessage(long id){
-        Notification message = notificationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
-        notificationRepository.delete(message);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping ("{id}")
+    public ResponseEntity<HttpStatus> deleteNotification(@PathVariable long id){
+        return notificationService.deleteNotification(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             org.springframework.web.bind.MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
+        return notificationService.handleValidationExceptions(ex);
     }
 }
