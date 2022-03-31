@@ -21,6 +21,7 @@ public class UserServiceApplication implements CommandLineRunner {
 
 
 	public static void main(String[] args) {
+		System.out.println("primjer pr-a <3");
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
