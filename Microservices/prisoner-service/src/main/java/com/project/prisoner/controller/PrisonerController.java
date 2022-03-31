@@ -34,6 +34,11 @@ public class PrisonerController {
         return prisonerService.getPrisonerById(id);
     }
 
+    @GetMapping("worst")
+    public List<Prisoner> getWorstPrisoners(){
+        return prisonerService.theWorst();
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deletePrisoner(@PathVariable long id){
         return prisonerService.deletePrisoner(id);

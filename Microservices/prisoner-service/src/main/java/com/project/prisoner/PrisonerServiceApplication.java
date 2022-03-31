@@ -30,6 +30,7 @@ public class PrisonerServiceApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		//po potrebi otkomentarisat za podatke u bazu
+		//prisonerService().generisiData();
 	}
 }
