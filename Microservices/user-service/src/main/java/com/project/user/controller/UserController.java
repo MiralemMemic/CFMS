@@ -6,6 +6,7 @@ import com.project.user.model.User;
 import com.project.user.repository.UserRepository;
 import com.project.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,6 +22,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+
+    @Value("${my.greeting: default value}")
+    private String greetingMessage;
 
     @Autowired
     private UserService userService;
@@ -40,6 +44,12 @@ public class UserController {
     @GetMapping("{id}")
     public ResponseEntity<User> getEmployeeById(@PathVariable  long id){
         return userService.getEmployeeById(id);
+    }
+
+    // greeting
+    @GetMapping("/greeting")
+    public String getGreeting(){
+        return "my.greeting: " + greetingMessage;
     }
 
     // build update user REST API
