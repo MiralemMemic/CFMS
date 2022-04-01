@@ -20,27 +20,27 @@ public class UserService {
     private UserRepository userRepository;
 
 
-    public List<User> getAllEmployees(){
+    public List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
     // build create user REST API
 
-    public ResponseEntity<String> createEmployee(User employee) {
-        userRepository.save(employee);
+    public ResponseEntity<String> createUser(User user) {
+        userRepository.save(user);
         return ResponseEntity.ok("User added");
     }
 
     // build get user by id REST API
 
-    public ResponseEntity<User> getEmployeeById(long id){
-        User prisoner = userRepository.findById(id)
+    public ResponseEntity<User> getUserById(long id){
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
-        return ResponseEntity.ok(prisoner);
+        return ResponseEntity.ok(user);
     }
 
     // build update user REST API
-    public ResponseEntity<User> updateEmployee(long id,User userDetails) {
+    public ResponseEntity<User> updateUser(long id,User userDetails) {
         User updateUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
 
@@ -57,12 +57,12 @@ public class UserService {
     }
 
     // build delete user REST API
-    public ResponseEntity<HttpStatus> deleteEmployee(long id){
+    public ResponseEntity<HttpStatus> deleteUser(long id){
 
-        User employee = userRepository.findById(id)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
 
-        userRepository.delete(employee);
+        userRepository.delete(user);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -78,4 +78,27 @@ public class UserService {
         });
         return errors;
     }
+
+
+
+    public void generateData() {
+        User user = new User();
+        user.setFirstName("Miralem");
+        user.setLastName("Memic");
+        user.setUsername("mmemic");
+        user.setPassword("miralem2022");
+        user.setEmail("mememic@hotmail.com");
+        user.setRole("warden");
+        userRepository.save(user);
+
+        User user1 = new User();
+        user1.setFirstName("Kenan");
+        user1.setLastName("Omic");
+        user1.setUsername("komic");
+        user1.setPassword("kenan2022");
+        user1.setEmail("komic@hotmail.com");
+        user1.setRole("warden");
+        userRepository.save(user1);
+    }
+
 }

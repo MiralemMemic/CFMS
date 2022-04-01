@@ -26,32 +26,32 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllEmployees(){
-        return userService.getAllEmployees();
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     // build create user REST API
     @PostMapping
-    public ResponseEntity<String> createEmployee(@RequestBody @Valid User employee) {
-       return userService.createEmployee(employee);
+    public ResponseEntity<String> createUser(@RequestBody @Valid User user) {
+       return userService.createUser(user);
     }
 
     // build get user by id REST API
     @GetMapping("{id}")
-    public ResponseEntity<User> getEmployeeById(@PathVariable  long id){
-        return userService.getEmployeeById(id);
+    public ResponseEntity<User> getUserById(@PathVariable  long id){
+        return userService.getUserById(id);
     }
 
     // build update user REST API
     @PutMapping("{id}")
-    public ResponseEntity<User> updateEmployee(@PathVariable long id,@RequestBody User userDetails) {
-        return userService.updateEmployee(id,userDetails);
+    public ResponseEntity<User> updateUser(@PathVariable long id,@RequestBody User userDetails) {
+        return userService.updateUser(id,userDetails);
     }
 
     // build delete user REST API
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id){
-        return userService.deleteEmployee(id);
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable long id){
+        return userService.deleteUser(id);
 
     }
 
