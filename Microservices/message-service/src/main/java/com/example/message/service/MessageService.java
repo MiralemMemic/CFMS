@@ -4,6 +4,7 @@ import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,14 @@ public class MessageService {
     public ResponseEntity<String> createMessage(Message message){
         messageRepository.save(message);
         return ResponseEntity.ok("Message sent");
+    }
+
+    public List<Message> getMessagesSortedBySender(){
+        return messageRepository.findAll(Sort.by(Sort.Direction.DESC,"sender"));
+    }
+
+    public List<Message> getMessagesSortedByReceiver(){
+        return messageRepository.findAll(Sort.by(Sort.Direction.DESC,"receiver"));
     }
 
     public ResponseEntity<Message> getMessageById(long id){
