@@ -56,6 +56,12 @@ public class UserController {
 
     }
 
+    @GetMapping("worst")
+    public List<User> getSortedUsers(){
+        return userService.getSorted();
+    }
+
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(

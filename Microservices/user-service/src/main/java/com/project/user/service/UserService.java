@@ -4,6 +4,7 @@ import com.project.user.exception.ResourceNotFoundException;
 import com.project.user.model.User;
 import com.project.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -101,4 +102,7 @@ public class UserService {
         userRepository.save(user1);
     }
 
+    public List<User> getSorted() {
+        return userRepository.findAll(Sort.by(Sort.Direction.DESC,"firstName"));
+    }
 }
