@@ -1,6 +1,7 @@
 package com.project.user.controller;
 
 
+import com.project.user.VO.ResponseTemplateVO;
 import com.project.user.exception.ResourceNotFoundException;
 import com.project.user.model.User;
 import com.project.user.repository.UserRepository;
@@ -30,20 +31,20 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllEmployees(){
-        return userService.getAllEmployees();
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
     }
 
     // build create user REST API
     @PostMapping
-    public ResponseEntity<String> createEmployee(@RequestBody @Valid User employee) {
-       return userService.createEmployee(employee);
+    public ResponseEntity<String> createUser(@RequestBody @Valid User user) {
+       return userService.createUser(user);
     }
 
     // build get user by id REST API
     @GetMapping("{id}")
-    public ResponseEntity<User> getEmployeeById(@PathVariable  long id){
-        return userService.getEmployeeById(id);
+    public ResponseEntity<User> getUserById(@PathVariable  long id){
+        return userService.getUserById(id);
     }
 
     // greeting
@@ -54,28 +55,34 @@ public class UserController {
 
     // build update user REST API
     @PutMapping("{id}")
-    public ResponseEntity<User> updateEmployee(@PathVariable long id,@RequestBody User userDetails) {
-        return userService.updateEmployee(id,userDetails);
+    public ResponseEntity<User> updateUser(@PathVariable long id,@RequestBody User userDetails) {
+        return userService.updateUser(id,userDetails);
     }
 
     // build delete user REST API
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id){
-        return userService.deleteEmployee(id);
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable long id){
+        return userService.deleteUser(id);
 
     }
+
+    @GetMapping("worst")
+    public List<User> getSortedUsers(){
+        return userService.getSorted();
+    }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             org.springframework.web.bind.MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
+        return userService.handleValidationExceptions(ex);
     }
+
+ /*   @GetMapping("/{id}")
+    public ResponseTemplateVO getUserWithMessages(@PathVariable("id") String id, Long userId) {
+        return userService.getUserWithMessage(userId);
+    }
+*/
 
 }

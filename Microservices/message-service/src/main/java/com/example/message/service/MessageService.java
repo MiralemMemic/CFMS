@@ -4,8 +4,10 @@ import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class MessageService {
+
     @Autowired
     private MessageRepository messageRepository;
 
@@ -29,6 +33,14 @@ public class MessageService {
         return ResponseEntity.ok("Message sent");
     }
 
+    public List<Message> getMessagesSortedBySender(){
+        return messageRepository.findAll(Sort.by(Sort.Direction.DESC,"sender"));
+    }
+
+    public List<Message> getMessagesSortedByReceiver(){
+        return messageRepository.findAll(Sort.by(Sort.Direction.DESC,"receiver"));
+    }
+
     public ResponseEntity<Message> getMessageById(long id){
         Message message = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
         return ResponseEntity.ok(message);
@@ -40,6 +52,7 @@ public class MessageService {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 
     public Map<String, String> handleValidationExceptions(
             org.springframework.web.bind.MethodArgumentNotValidException ex) {

@@ -25,9 +25,9 @@ public class NotificationService {
         return notificationRepository.findAll();
     }
 
-    public Notification createNotification(Notification notification){
-
-        return notificationRepository.save(notification);
+    public ResponseEntity<String> createNotification(Notification notification){
+        notificationRepository.save(notification);
+        return ResponseEntity.ok("Notification sent");
     }
 
     public ResponseEntity<Notification> getNotificationById(long id){

@@ -30,8 +30,7 @@ public class NotificationController {
     }
 
     @PostMapping
-    public Notification createNotification(@RequestBody @Valid Notification message){
-
+    public ResponseEntity<String> createNotification(@RequestBody @Valid Notification message){
         return notificationService.createNotification(message);
     }
 

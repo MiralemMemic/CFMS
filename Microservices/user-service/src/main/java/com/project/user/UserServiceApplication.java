@@ -24,34 +24,18 @@ public class UserServiceApplication implements CommandLineRunner {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
-	@Autowired
-	private UserRepository userRepository;
+//	@Autowired
+//	private UserRepository userRepository;
 
 
 	@Override
 	public void run(String... args) throws Exception {
 
+		//getUserService().generateData();
 
-		User user = new User();
-		user.setFirstName("Miralem");
-		user.setLastName("Memic");
-		user.setUsername("mmemic");
-		user.setPassword("miralem2022");
-		user.setEmail("mememic@hotmail.com");
-		user.setRole("warden");
-		userRepository.save(user);
-
-		User user1 = new User();
-		user1.setFirstName("Kenan");
-		user1.setLastName("Omic");
-		user1.setUsername("komic");
-		user1.setPassword("kenan2022");
-		user1.setEmail("komic@hotmail.com");
-		user1.setRole("warden");
-		userRepository.save(user1);
 	}
 
-
+/*
 	@Bean
 	public CommandLineRunner run(UserRepository userRepository) throws Exception {
 		return (String[] args) -> {
@@ -77,6 +61,6 @@ public class UserServiceApplication implements CommandLineRunner {
 		};
 	}
 
-
+*/
 
 }

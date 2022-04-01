@@ -35,6 +35,16 @@ public class MessageController {
         return messageService.createMessage(message);
     }
 
+    @GetMapping()
+    public List<Message> sortMessagesByReceiver (){
+        return messageService.getMessagesSortedByReceiver();
+    }
+
+    @GetMapping()
+    public List<Message> sortMessagesBySender (){
+        return messageService.getMessagesSortedBySender();
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<Message> getMessageById(@PathVariable long id){
         return messageService.getMessageById(id);
