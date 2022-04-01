@@ -39,6 +39,18 @@ public class PrisonerController {
         return prisonerService.theWorst();
     }
 
+    @GetMapping("most-common-offense")
+    public Object mostCommonOffense(){ return prisonerService.mostCommonOffense();}
+
+    @GetMapping("cells")
+    public List cellsNotEmpty(){ return prisonerService.notEmptyCells();}
+
+    @GetMapping("coming-out")
+    public Object commingOutFirst(){ return prisonerService.commingOutFirst();}
+
+    @GetMapping("where-is-evil")
+    public Object whereIsTheWorst(){ return prisonerService.whereIsTheWorst();}
+
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deletePrisoner(@PathVariable long id){
         return prisonerService.deletePrisoner(id);
