@@ -169,7 +169,7 @@ public class MessageControllerTest {
         message.setSender(2);
         message.setContent("Hello");
 
-        Mockito.when(messageService.createMessage(message)).thenReturn(ResponseEntity.ok("User added"));
+        Mockito.when(messageService.createMessage(message)).thenReturn(ResponseEntity.ok("Message added"));
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(message);
