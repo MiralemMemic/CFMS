@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -120,7 +121,7 @@ class UserControllerIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/users/0"))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
-    
+
 
     /*
     @Test
@@ -173,6 +174,25 @@ class UserControllerIntegrationTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+ /*   @Test
+    @DisplayName("Should not Post  - /api/users/")
+    public void testPost1() throws Exception {
+
+        User katrin = new User();
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(katrin);
+
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .post("/api/v1/users")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_VALUE);
+
+        this.mockMvc.perform(builder)
+                .andExpect(status().is4xxClientError());
+    }
+*/
 
 
 }

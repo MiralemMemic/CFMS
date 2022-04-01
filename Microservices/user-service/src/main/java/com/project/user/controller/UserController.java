@@ -1,6 +1,7 @@
 package com.project.user.controller;
 
 
+import com.project.user.VO.ResponseTemplateVO;
 import com.project.user.exception.ResourceNotFoundException;
 import com.project.user.model.User;
 import com.project.user.repository.UserRepository;
@@ -59,13 +60,13 @@ public class UserController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
             org.springframework.web.bind.MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
+        return userService.handleValidationExceptions(ex);
     }
+
+ /*   @GetMapping("/{id}")
+    public ResponseTemplateVO getUserWithMessages(@PathVariable("id") String id, Long userId) {
+        return userService.getUserWithMessage(userId);
+    }
+*/
 
 }
