@@ -3,6 +3,7 @@ package com.project.prisoner.service;
 import com.project.prisoner.exception.ResourceNotFoundException;
 import com.project.prisoner.model.Prisoner;
 import com.project.prisoner.repository.PrisonerRepository;
+import com.project.prisoner.repository.QueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ import java.util.Map;
 public class PrisonerService {
     @Autowired
     private PrisonerRepository prisonerRepository;
+
+    @Autowired
+    private QueryRepository queryRepository;
 
     public List<Prisoner> getAllPrisoners(){
 
@@ -57,7 +61,23 @@ public class PrisonerService {
     }
 
     public List<Prisoner> theWorst(){
-        return prisonerRepository.findAll(Sort.by(Sort.Direction.DESC,"lengthOfSentence"));
+        return queryRepository.findTheMostEvil();
+    }
+
+    public Object mostCommonOffense(){
+        return queryRepository.mostCommonCriminalAct().get(0);
+    }
+
+    public List notEmptyCells(){
+        return queryRepository.howManyCellsAreNotEmpty();
+    }
+
+    public Object commingOutFirst(){
+        return queryRepository.comingOutFirst().get(0);
+    }
+
+    public Object whereIsTheWorst(){
+        return queryRepository.whereIsTheWorstOfThemAll().get(0);
     }
 
     public void generisiData(){
@@ -68,7 +88,7 @@ public class PrisonerService {
         p.setOffense(2);
         p.setIdentificationNumber(34555);
         p.setLengthOfSentence(4);
-        p.setSentenceEvaluation("Još uvijek nervoyan");
+        p.setSentenceEvaluation("Još uvijek nervozan");
         prisonerRepository.save(p);
 
         Prisoner p1 = new Prisoner();
@@ -112,5 +132,25 @@ public class PrisonerService {
         p4.setSentenceEvaluation("Pamti još uvijek neke livade i rijeke");
         prisonerRepository.save(p4);
 
+        Prisoner p5 = new Prisoner();
+        p5.setFirstName("Kemal");
+        p5.setLastName("Halilović");
+        p5.setCurrentCell(2);
+        p5.setOffense(2);
+        p5.setLengthOfSentence(3);
+        p5.setIdentificationNumber(71722);
+        p5.setSentenceEvaluation("Plače još uvijek jer je ukrao babici štap");
+        prisonerRepository.save(p5);
+
+
+        Prisoner p6 = new Prisoner();
+        p6.setFirstName("Michael");
+        p6.setLastName("Scofield");
+        p6.setCurrentCell(99);
+        p6.setOffense(5);
+        p6.setLengthOfSentence(8);
+        p6.setIdentificationNumber(75522);
+        p6.setSentenceEvaluation("Lagan");
+        prisonerRepository.save(p6);
     }
 }
