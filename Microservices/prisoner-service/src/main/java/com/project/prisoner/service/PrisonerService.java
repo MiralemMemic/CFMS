@@ -64,6 +64,10 @@ public class PrisonerService {
         return queryRepository.findTheMostEvil();
     }
 
+    public List<Prisoner> sittingInCell(long cellId){
+        return queryRepository.prisonersSittingInCell(Long.toString(cellId));
+    }
+
     public Object mostCommonOffense(){
         return queryRepository.mostCommonCriminalAct().get(0);
     }

@@ -34,6 +34,12 @@ public class PrisonerController {
         return prisonerService.getPrisonerById(id);
     }
 
+    @GetMapping("cell/{id}")
+    public List<Prisoner> getPrisonersFromCell(@PathVariable long id){
+        return prisonerService.sittingInCell(id);
+    }
+
+
     @GetMapping("worst")
     public List<Prisoner> getWorstPrisoners(){
         return prisonerService.theWorst();
@@ -55,6 +61,8 @@ public class PrisonerController {
     public ResponseEntity<HttpStatus> deletePrisoner(@PathVariable long id){
         return prisonerService.deletePrisoner(id);
     }
+
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

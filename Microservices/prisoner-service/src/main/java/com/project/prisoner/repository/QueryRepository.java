@@ -32,5 +32,9 @@ public class QueryRepository {
         return entityManager.createQuery("SELECT p.firstName,p.lastName,p.currentCell from Prisoner p where p.lengthOfSentence=(select max(lengthOfSentence) from Prisoner)").getResultList();
     }
 
+    public List prisonersSittingInCell(String cellId){
+        return entityManager.createQuery("SELECT p from Prisoner p where p.currentCell="+cellId).getResultList();
+    }
+
 
 }
