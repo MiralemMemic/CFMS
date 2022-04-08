@@ -2,6 +2,8 @@ package com.project.notification.service;
 
 import com.project.notification.exception.ResourceNotFoundException;
 import com.project.notification.model.Notification;
+import com.project.notification.model.NotifierMessage;
+import com.project.notification.model.User;
 import com.project.notification.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,16 +11,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class NotificationService {
 
     @Autowired
     private NotificationRepository notificationRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     public List<Notification> getAllNotifications(){
@@ -40,6 +48,15 @@ public class NotificationService {
         notificationRepository.delete(notification);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    public ResponseEntity<NotifierMessage> whoNotified(long id){
+        Notification notification = notificationRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Notification does not exist with id:" + id));
+        ResponseEntity<User> responseEntity = restTemplate.getForEntity("http://user-service/api/v1/users/" + notification.getNotifier(), User.class);
+        User notifier = responseEntity.getBody();
+        NotifierMessage notifierMessage = new NotifierMessage(notification.getText(),notifier);
+        return ResponseEntity.ok(notifierMessage);
     }
 
     public Map<String, String> handleValidationExceptions(

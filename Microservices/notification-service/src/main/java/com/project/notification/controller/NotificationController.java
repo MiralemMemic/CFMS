@@ -2,6 +2,7 @@ package com.project.notification.controller;
 
 import com.project.notification.exception.ResourceNotFoundException;
 import com.project.notification.model.Notification;
+import com.project.notification.model.NotifierMessage;
 import com.project.notification.repository.NotificationRepository;
 import com.project.notification.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class NotificationController {
     @DeleteMapping ("{id}")
     public ResponseEntity<HttpStatus> deleteNotification(@PathVariable long id){
         return notificationService.deleteNotification(id);
+    }
+
+    @GetMapping("who-notified/{id}")
+    public ResponseEntity<NotifierMessage> whoNotified(@PathVariable long id){
+        return notificationService.whoNotified(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

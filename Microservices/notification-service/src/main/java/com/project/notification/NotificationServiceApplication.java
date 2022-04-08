@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @OpenAPIDefinition
@@ -17,6 +19,12 @@ public class NotificationServiceApplication implements CommandLineRunner {
 	@Bean
 	public NotificationService notificationService(){
 		return new NotificationService();
+	}
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
 	}
 
 	public static void main(String[] args) {

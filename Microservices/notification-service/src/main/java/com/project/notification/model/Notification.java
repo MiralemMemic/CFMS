@@ -30,4 +30,7 @@ public class Notification {
     @Column(name = "text")
     private String text;
 
+    @Column(name= "notifier_name")
+    private long notifier;
+
 }
