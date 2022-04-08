@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @OpenAPIDefinition
@@ -17,6 +18,11 @@ public class UserServiceApplication implements CommandLineRunner {
 	@Bean
 	public UserService getUserService(){
 		return new UserService();
+	}
+
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
 	}
 
 

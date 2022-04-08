@@ -1,7 +1,7 @@
 package com.project.user.service;
 
 import com.project.user.exception.ResourceNotFoundException;
-import com.project.user.model.User;
+import com.project.user.model.*;
 import com.project.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -9,16 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
+import org.springframework.web.client.RestTemplate;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     public List<User> getAllUsers(){
@@ -38,6 +44,30 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
         return ResponseEntity.ok(user);
+    }
+
+    public ResponseEntity<UserMessage> getUsersSentMessages(long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
+        ResponseEntity<Message[]> responseEntity = restTemplate.getForEntity("http://localhost:8081/api/v1/messages/sent/" + id, Message[].class);
+        Message[] messageArray = responseEntity.getBody();
+        List<String> messages = Arrays.stream(messageArray)
+                .map(Message::getContent)
+                .collect(Collectors.toList());
+        UserMessage userMessage = new UserMessage(user, messages);
+        return ResponseEntity.ok(userMessage);
+    }
+
+    public ResponseEntity<UserMessage> getUsersReceivedMessages(long id){
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
+        ResponseEntity<Message[]> responseEntity = restTemplate.getForEntity("http://localhost:8081/api/v1/messages/received/" + id, Message[].class);
+        Message[] messageArray = responseEntity.getBody();
+        List<String> messages = Arrays.stream(messageArray)
+                .map(Message::getContent)
+                .collect(Collectors.toList());
+        UserMessage userMessage = new UserMessage(user, messages);
+        return ResponseEntity.ok(userMessage);
     }
 
     // build update user REST API

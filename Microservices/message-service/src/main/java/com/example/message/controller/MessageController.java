@@ -41,6 +41,16 @@ public class MessageController {
         return messageService.getMessageById(id);
     }
 
+    @GetMapping("/sent/{id}")
+    public ResponseEntity<List<Message>> getSentMessagesByUserId(@PathVariable long id){
+        return messageService.getSentMessagesByUserId(id);
+    }
+
+    @GetMapping("/received/{id}")
+    public ResponseEntity<List<Message>> getReceivedMessagesByUserId(@PathVariable long id){
+        return messageService.getReceivedMessagesByUserId(id);
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteMessage(@PathVariable long id){
         return messageService.deleteMessage(id);
