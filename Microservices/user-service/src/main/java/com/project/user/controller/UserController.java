@@ -3,7 +3,9 @@ package com.project.user.controller;
 
 import com.project.user.VO.ResponseTemplateVO;
 import com.project.user.exception.ResourceNotFoundException;
+import com.project.user.model.Message;
 import com.project.user.model.User;
+import com.project.user.model.UserMessage;
 import com.project.user.repository.UserRepository;
 import com.project.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,16 @@ public class UserController {
     @GetMapping("{id}")
     public ResponseEntity<User> getUserById(@PathVariable  long id){
         return userService.getUserById(id);
+    }
+
+    @GetMapping("/sent-messages/{id}")
+    public ResponseEntity<UserMessage> getUsersSentMessages(@PathVariable  long id){
+        return userService.getUsersSentMessages(id);
+    }
+
+    @GetMapping("/received-messages/{id}")
+    public ResponseEntity<UserMessage> getUsersReceivedMessages(@PathVariable  long id){
+        return userService.getUsersReceivedMessages(id);
     }
 
     // greeting

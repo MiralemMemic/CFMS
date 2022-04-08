@@ -17,14 +17,13 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @NotNull(message =  "The receiver is required")
     @Min(1)
     @Column(name= "receiver_name")
-    private int receiver;
+    private long receiver;
 
     @Column(name = "sender_name")
-    private int sender;
+    private long sender;
 
     @NotBlank(message =  "The message is required")
     @Column(name = "content")

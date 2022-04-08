@@ -46,6 +46,16 @@ public class MessageService {
         return ResponseEntity.ok(message);
     }
 
+    public ResponseEntity<List<Message>> getSentMessagesByUserId(long id){
+        List<Message> message = messageRepository.findBySender(id);
+        return ResponseEntity.ok(message);
+    }
+
+    public ResponseEntity<List<Message>> getReceivedMessagesByUserId(long id){
+        List<Message> message = messageRepository.findByReceiver(id);
+        return ResponseEntity.ok(message);
+    }
+
     public ResponseEntity<HttpStatus> deleteMessage(long id){
         Message message = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
         messageRepository.delete(message);
