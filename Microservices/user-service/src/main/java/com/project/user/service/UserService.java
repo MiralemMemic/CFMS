@@ -49,7 +49,7 @@ public class UserService {
     public ResponseEntity<UserMessage> getUsersSentMessages(long id){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
-        ResponseEntity<Message[]> responseEntity = restTemplate.getForEntity("http://localhost:8081/api/v1/messages/sent/" + id, Message[].class);
+        ResponseEntity<Message[]> responseEntity = restTemplate.getForEntity("http://message-service/api/v1/messages/sent/" + id, Message[].class);
         Message[] messageArray = responseEntity.getBody();
         List<String> messages = Arrays.stream(messageArray)
                 .map(Message::getContent)
@@ -61,7 +61,7 @@ public class UserService {
     public ResponseEntity<UserMessage> getUsersReceivedMessages(long id){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
-        ResponseEntity<Message[]> responseEntity = restTemplate.getForEntity("http://localhost:8081/api/v1/messages/received/" + id, Message[].class);
+        ResponseEntity<Message[]> responseEntity = restTemplate.getForEntity("http://message-service/api/v1/messages/received/" + id, Message[].class);
         Message[] messageArray = responseEntity.getBody();
         List<String> messages = Arrays.stream(messageArray)
                 .map(Message::getContent)
