@@ -1,0 +1,13 @@
+package com.project.systemevent;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class SystemEventServiceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
