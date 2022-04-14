@@ -3,6 +3,7 @@ package com.project.user.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.user.exception.ResourceNotFoundException;
 import com.project.user.model.User;
+import com.project.user.model.UserMessage;
 import com.project.user.service.UserService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -122,6 +124,52 @@ class UserControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
+
+    @Test
+    @DisplayName("Should get all sent messages by user id - /api/users/")
+    public void testUserMessageSent() throws Exception {
+        User katrin = new User();
+        katrin.setFirstName("Katrin");
+        katrin.setLastName("Francuska");
+        katrin.setUsername("stanicaPula");
+        katrin.setPassword("dijon123");
+        katrin.setRole("warden");
+        katrin.setEmail("unknown@hotmail.com");
+        UserMessage userMessage = new UserMessage();
+        userMessage.setUser(katrin);
+        List<String> messages = Arrays.asList("Hallo","Goodbye");
+        userMessage.setMessages(messages);
+
+
+        Mockito.when(userService.getUsersSentMessages(0l)).thenReturn(ResponseEntity.ok(userMessage));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/sent-messages/{id}", 0L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages", Matchers.is(Arrays.asList("Hallo","Goodbye"))));
+    }
+
+    @Test
+    @DisplayName("Should get all received messages by user id - /api/users/")
+    public void testUserMessageReceived() throws Exception {
+        User katrin = new User();
+        katrin.setFirstName("Katrin");
+        katrin.setLastName("Francuska");
+        katrin.setUsername("stanicaPula");
+        katrin.setPassword("dijon123");
+        katrin.setRole("warden");
+        katrin.setEmail("unknown@hotmail.com");
+        UserMessage userMessage = new UserMessage();
+        userMessage.setUser(katrin);
+        List<String> messages = Arrays.asList("Hallo","Goodbye");
+        userMessage.setMessages(messages);
+
+
+        Mockito.when(userService.getUsersReceivedMessages(0l)).thenReturn(ResponseEntity.ok(userMessage));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/received-messages/{id}", 0L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages", Matchers.is(Arrays.asList("Hallo","Goodbye"))));
+    }
 
     /*
     @Test

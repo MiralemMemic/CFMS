@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = PrisonerController.class)
@@ -179,5 +180,98 @@ public class PrisonerControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }
+
+    @Test
+    @DisplayName("Get worst prisoners")
+    public void GetWorstPrisoners() throws Exception{
+
+        Prisoner prisoner1 = new Prisoner();
+        prisoner1.setId(1);
+        prisoner1.setFirstName("Kem");
+        prisoner1.setLastName("Hal");
+        prisoner1.setCurrentCell(1);
+        prisoner1.setLengthOfSentence(5);
+        prisoner1.setIdentificationNumber(1);
+        prisoner1.setSentenceEvaluation("Ok");
+        prisoner1.setOffense(1);
+
+
+        Mockito.when(prisonerService.theWorst()).thenReturn(Arrays.asList(prisoner1));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/prisoners/worst"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{\"id\":1,\"firstName\":\"Kem\",\"lastName\":\"Hal\",\"currentCell\":1,\"lengthOfSentence\":5,\"identificationNumber\":1,\"sentenceEvaluation\":\"Ok\",\"offense\":1}]"));
+    }
+
+    @Test
+    @DisplayName("Get most common offense prisoners")
+    public void GetMostCommonOffensePrisoners() throws Exception{
+
+        Mockito.when(prisonerService.mostCommonOffense()).thenReturn(1);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/prisoners/most-common-offense"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("1"));
+    }
+
+    @Test
+    @DisplayName("Get cells not empty")
+    public void GetCells() throws Exception{
+
+        Mockito.when(prisonerService.notEmptyCells()).thenReturn(Arrays.asList(1,4,5));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/prisoners/cells"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[1,4,5]"));
+    }
+
+    @Test
+    @DisplayName("Get coming out first")
+    public void GetComingOut() throws Exception{
+
+
+        Prisoner prisoner1 = new Prisoner();
+        prisoner1.setId(1);
+        prisoner1.setFirstName("Kem");
+        prisoner1.setLastName("Hal");
+        prisoner1.setCurrentCell(1);
+        prisoner1.setLengthOfSentence(5);
+        prisoner1.setIdentificationNumber(1);
+        prisoner1.setSentenceEvaluation("Ok");
+        prisoner1.setOffense(1);
+
+        Mockito.when(prisonerService.commingOutFirst()).thenReturn((prisoner1));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/prisoners/coming-out"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\":1,\"firstName\":\"Kem\",\"lastName\":\"Hal\",\"currentCell\":1,\"lengthOfSentence\":5,\"identificationNumber\":1,\"sentenceEvaluation\":\"Ok\",\"offense\":1}"));
+    }
+
+    @Test
+    @DisplayName("Get worst")
+    public void GetWorst() throws Exception{
+
+        Prisoner prisoner1 = new Prisoner();
+        prisoner1.setId(1);
+        prisoner1.setFirstName("Kem");
+        prisoner1.setLastName("Hal");
+        prisoner1.setCurrentCell(1);
+        prisoner1.setLengthOfSentence(5);
+        prisoner1.setIdentificationNumber(1);
+        prisoner1.setSentenceEvaluation("Ok");
+        prisoner1.setOffense(1);
+
+        Mockito.when(prisonerService.whereIsTheWorst()).thenReturn((prisoner1));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/prisoners/where-is-evil"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\":1,\"firstName\":\"Kem\",\"lastName\":\"Hal\",\"currentCell\":1,\"lengthOfSentence\":5,\"identificationNumber\":1,\"sentenceEvaluation\":\"Ok\",\"offense\":1}"));
+    }
+
 
 }

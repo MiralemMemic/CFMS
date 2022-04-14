@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.notification.controller.NotificationController;
 import com.project.notification.exception.ResourceNotFoundException;
 import com.project.notification.model.Notification;
+import com.project.notification.model.NotifierMessage;
+import com.project.notification.model.User;
 import com.project.notification.repository.NotificationRepository;
 import com.project.notification.service.NotificationService;
 import org.hamcrest.Matchers;
@@ -150,4 +152,27 @@ public class NotificationControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is(200));
     }
+
+    @Test
+    @DisplayName("Who Notified  - /api/notifications/")
+    public void testWhoNotified() throws Exception {
+
+
+
+        User user = new User();
+        user.setFirstName("Kem");
+        user.setLastName("Hal");
+        user.setRole("Zatv");
+
+        NotifierMessage notifierMessage = new NotifierMessage();
+        notifierMessage.setNotificationMessage("Kriv");
+        notifierMessage.setNotifier(user);
+
+        Mockito.when(notificationService.whoNotified(1)).thenReturn(ResponseEntity.ok(notifierMessage));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/notifications/who-notified/1", 1L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.notificationMessage", Matchers.is("Kriv")));
+    }
+
 }
