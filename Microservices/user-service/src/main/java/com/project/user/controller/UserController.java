@@ -8,6 +8,8 @@ import com.project.user.model.User;
 import com.project.user.model.UserMessage;
 import com.project.user.repository.UserRepository;
 import com.project.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,8 @@ import java.util.Map;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
+    private static Logger log = LoggerFactory.getLogger(UserController.class);
+
     @Value("${my.greeting: default value}")
     private String greetingMessage;
 
@@ -38,28 +42,33 @@ public class UserController {
 
     @GetMapping
     public List<User> getAllUsers(){
+        log.info("UserConstroller - getAllUsers");
         return userService.getAllUsers();
     }
 
     // build create user REST API
     @PostMapping
     public ResponseEntity<String> createUser(@RequestBody @Valid User user) {
-       return userService.createUser(user);
+        log.info("UserConstroller - createUser");
+        return userService.createUser(user);
     }
 
     // build get user by id REST API
     @GetMapping("{id}")
     public ResponseEntity<User> getUserById(@PathVariable  long id){
+        log.info("UserConstroller - getUserById");
         return userService.getUserById(id);
     }
 
     @GetMapping("/sent-messages/{id}")
     public ResponseEntity<UserMessage> getUsersSentMessages(@PathVariable  long id){
+        log.info("UserConstroller - getUsersSentMessages");
         return userService.getUsersSentMessages(id);
     }
 
     @GetMapping("/received-messages/{id}")
     public ResponseEntity<UserMessage> getUsersReceivedMessages(@PathVariable  long id){
+        log.info("UserConstroller - getUsersReceivedMessages");
         return userService.getUsersReceivedMessages(id);
     }
 
@@ -72,18 +81,20 @@ public class UserController {
     // build update user REST API
     @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable long id,@RequestBody User userDetails) {
+        log.info("UserConstroller - updateUser");
         return userService.updateUser(id,userDetails);
     }
 
     // build delete user REST API
     @DeleteMapping("{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable long id){
+        log.info("UserConstroller - deleteUser");
         return userService.deleteUser(id);
-
     }
 
     @GetMapping("worst")
     public List<User> getSortedUsers(){
+        log.info("UserConstroller - getSortedUsers");
         return userService.getSorted();
     }
 
