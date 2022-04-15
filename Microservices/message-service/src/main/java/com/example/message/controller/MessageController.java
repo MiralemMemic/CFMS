@@ -4,6 +4,8 @@ import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
 import com.example.message.service.MessageService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +24,27 @@ import java.util.Map;
 @RequestMapping("/api/v1/messages")
 public class MessageController {
 
+    private static Logger log = LoggerFactory.getLogger(MessageController.class);
+
     @Autowired
     private MessageService messageService;
 
     @GetMapping
     public List<Message> getAllMessages(){
+        log.info("MessageController - getAllMessages");
         return messageService.getAllMessages();
     }
 
     @PostMapping
     public ResponseEntity<String> createMessage( @RequestBody @Valid Message message){
+        log.info("MessageController - createMessage");
         return messageService.createMessage(message);
     }
 
 
     @GetMapping("{id}")
     public ResponseEntity<Message> getMessageById(@PathVariable long id){
+        log.info("MessageController - getMessageById");
         return messageService.getMessageById(id);
     }
 
