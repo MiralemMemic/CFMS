@@ -17,13 +17,8 @@ public class SystemEventsVer2Application{
         return new LogServiceImpl();
     }
 
-    @Autowired
-    private LogRepository logRepository;
-
-
     public static void main(String[] args) {
         SpringApplication.run(SystemEventsVer2Application.class, args);
-
     }
 
 
