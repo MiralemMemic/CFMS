@@ -15,5 +15,5 @@ message LogResponse {
 }
 
 service LogService {
-  rpc hello(LogRequest) returns (LogResponse);
+  rpc log(LogRequest) returns (LogResponse);
 }
