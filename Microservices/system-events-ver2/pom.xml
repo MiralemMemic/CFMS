@@ -18,6 +18,7 @@
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
 		<protobuf.version>3.2.0</protobuf.version>
 		<protobuf-plugin.version>0.6.1</protobuf-plugin.version>
+		<grpc.version>1.31.1</grpc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -80,13 +81,32 @@
 			<artifactId>grpc-server-spring-boot-starter</artifactId>
 			<version>2.13.1.RELEASE</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>30.1.1-jre</version>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-netty-shaded</artifactId>
+			<version>${grpc.version}</version>
+			<scope>runtime</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-protobuf</artifactId>
+			<version>${grpc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-stub</artifactId>
+			<version>${grpc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-core</artifactId>
+			<version>${grpc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-services</artifactId>
+			<version>${grpc.version}</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -97,6 +117,12 @@
 				<version>2021.0.1</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.grpc</groupId>
+				<artifactId>grpc-bom</artifactId>
+				<version>${grpc.version}</version>
+				<type>pom</type>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
