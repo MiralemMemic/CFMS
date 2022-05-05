@@ -18,7 +18,7 @@
 		<spring-cloud.version>2021.0.1</spring-cloud.version>
 		<protobuf.version>3.2.0</protobuf.version>
 		<protobuf-plugin.version>0.6.1</protobuf-plugin.version>
-		<grpc.version>1.31.1</grpc.version>
+		<grpc.version>1.42.2</grpc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -85,7 +85,6 @@
 			<groupId>io.grpc</groupId>
 			<artifactId>grpc-netty-shaded</artifactId>
 			<version>${grpc.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>

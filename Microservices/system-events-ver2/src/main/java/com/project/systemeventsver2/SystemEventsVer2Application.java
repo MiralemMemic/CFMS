@@ -12,10 +12,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableEurekaClient
 public class SystemEventsVer2Application{
-    @Bean
-    LogServiceImpl logService(){
-        return new LogServiceImpl();
-    }
 
     @Autowired
     private LogRepository logRepository;
