@@ -12,14 +12,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableEurekaClient
 public class SystemEventsVer2Application{
-    @Bean
-    LogServiceImpl logService(){
-        return new LogServiceImpl();
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(SystemEventsVer2Application.class, args);
     }
-
 
 }

@@ -1,0 +1,19 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package com.project.prisoner;
+
+message LogRequest {
+  string time = 1;
+  string name = 2;
+  string type = 3;
+  string resource = 4;
+  string response = 5;
+}
+
+message LogResponse {
+  string response = 1;
+}
+
+service LogService {
+  rpc log(LogRequest) returns (LogResponse);
+}
