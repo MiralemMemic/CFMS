@@ -1,36 +1,56 @@
 package com.project.notification.interceptor;
 
 
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 import com.project.notification.controller.NotificationController;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 
-@Component
+@Service
 public class NotificationInterceptor implements HandlerInterceptor {
+
+    @Qualifier("eurekaClient")
+    @Autowired
+    private EurekaClient eurekaClient;
+
 
     private static Logger log = LoggerFactory.getLogger(NotificationController.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("NotificationInterceptor - preHandle");
-        return HandlerInterceptor.super.preHandle(request, response, handler);
-    }
-
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("NotificationInterceptor - postHandle");
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+        StringBuffer requestURL = request.getRequestURL();
+        log.info("preHandle => Request URL: {}", requestURL);
+        return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        log.info("NotificationInterceptor - afterCompletion");
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+        int status = response.getStatus();
+
+        InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090).usePlaintext().build();
+        com.project.systemeventsver2.LogServiceGrpc.LogServiceBlockingStub stub = com.project.systemeventsver2.LogServiceGrpc.newBlockingStub(channel);
+        Calendar c = Calendar.getInstance();
+        String time = c.getTime().toString();
+        int res = response.getStatus();
+        String resp = Integer.toString(res);
+        com.project.systemeventsver2.LogRequest request1 = com.project.systemeventsver2.LogRequest.newBuilder()
+                .setTime(time).setName("Notification").setType(request.getMethod()).setResource("notification").setResponse(resp)
+                .build();
+        com.project.systemeventsver2.LogResponse response1 = stub.log(request1);
+
     }
 }

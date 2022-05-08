@@ -24,8 +24,8 @@ public class LogServiceImpl extends LogServiceGrpc.LogServiceImplBase{
         log.setName(request.getName());
         log.setType(request.getType());
         log.setResource(request.getResource());
-        log.setResponse(request.getResource());
-
+        log.setResponse(request.getResponse());
+        System.out.println("Saved log: " + request.getName() +", " + request.getTime()+", " + request.getResource()+", " + request.getType()+", " + request.getResponse());
         logRepository.save(log);
 
         LogResponse response = LogResponse.newBuilder()
