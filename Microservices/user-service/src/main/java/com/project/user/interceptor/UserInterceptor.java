@@ -47,7 +47,7 @@ public class UserInterceptor implements HandlerInterceptor {
         int res = response.getStatus();
         String resp = Integer.toString(res);
         com.project.systemeventsver2.LogRequest request1 = com.project.systemeventsver2.LogRequest.newBuilder()
-                .setTime(time).setName("Prisoner").setType(request.getMethod()).setResource("prisoner").setResponse(resp)
+                .setTime(time).setName("User").setType(request.getMethod()).setResource("user").setResponse(resp)
                 .build();
         com.project.systemeventsver2.LogResponse response1 = stub.log(request1);
 
