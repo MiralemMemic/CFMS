@@ -38,7 +38,7 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         int status = response.getStatus();
-
+/*
         InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090).usePlaintext().build();
         com.project.systemeventsver2.LogServiceGrpc.LogServiceBlockingStub stub = com.project.systemeventsver2.LogServiceGrpc.newBlockingStub(channel);
@@ -50,6 +50,8 @@ public class UserInterceptor implements HandlerInterceptor {
                 .setTime(time).setName("User").setType(request.getMethod()).setResource("user").setResponse(resp)
                 .build();
         com.project.systemeventsver2.LogResponse response1 = stub.log(request1);
+
+ */
 
     }
 }
