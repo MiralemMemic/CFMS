@@ -42,27 +42,27 @@ public class UserController {
 
     @GetMapping
     public List<User> getAllUsers(){
-        log.info("UserConstroller - getAllUsers");
+        log.info("UserController - getAllUsers");
         return userService.getAllUsers();
     }
 
     // build create user REST API
-    @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody @Valid User user) {
-        log.info("UserConstroller - createUser");
-        return userService.createUser(user);
-    }
-
     // build get user by id REST API
     @GetMapping("{id}")
     public ResponseEntity<User> getUserById(@PathVariable  long id){
-        log.info("UserConstroller - getUserById");
+        log.info("UserController - getUserById");
         return userService.getUserById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createUser(@RequestBody @Valid User user) {
+        log.info("UserController - createUser");
+        return userService.createUser(user);
     }
 
     @GetMapping("/sent-messages/{id}")
     public ResponseEntity<UserMessage> getUsersSentMessages(@PathVariable  long id){
-        log.info("UserConstroller - getUsersSentMessages");
+        log.info("UserController - getUsersSentMessages");
         return userService.getUsersSentMessages(id);
     }
 
