@@ -1,6 +1,8 @@
 package com.example.message.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "message")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Message.class)
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
