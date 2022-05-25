@@ -21,6 +21,8 @@ public class UserServiceApplication implements CommandLineRunner {
 		return new UserService();
 	}
 
+
+
 	@Bean
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
