@@ -34,6 +34,9 @@ public class MessageService {
     private AmqpTemplate rabbitTemplate;
 
     @Autowired
+    private MessageStatusPublisher messageStatusPublisher;
+
+    @Autowired
     private MessageRepository messageRepository;
 
     @Value("${rabbitmq.exchange}")

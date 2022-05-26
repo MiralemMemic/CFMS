@@ -1,5 +1,6 @@
 package com.example.message.controller;
 
+import com.commondtos.event.MessageStatus;
 import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
@@ -60,6 +61,11 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<String> createMessage( @RequestBody @Valid Message message){
         log.info("MessageController - createMessage");
+        message.setMessageStatus(MessageStatus.MESSAGE_CREATED);
+
+        //produce event
+
+
         return messageService.createMessage(message);
     }
 
