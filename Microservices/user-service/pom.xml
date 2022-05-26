@@ -222,6 +222,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>docker-user-service</finalName>
 	</build>
 
 </project>

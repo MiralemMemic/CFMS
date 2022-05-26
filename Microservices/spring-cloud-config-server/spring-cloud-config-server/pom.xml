@@ -48,6 +48,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>docker-spring-cloud-config-server</finalName>
 	</build>
 
 </project>
