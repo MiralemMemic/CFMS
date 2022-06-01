@@ -92,10 +92,4 @@ public class MessageController {
         return messageService.handleValidationExceptions(ex);
     }
 
-  /*  @RequestMapping("/indexMessage/{id}")
-    public String indexMessage(@PathVariable String id) {
-        messageService.sendMessage(id);
-        return "";
-    }*/
-
 }

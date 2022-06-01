@@ -48,5 +48,4 @@ public class RabbitMQConfiguration {
             rabbitTemplate.setMessageConverter(jsonMessageConverter());
             return rabbitTemplate;
         }
-
 }
