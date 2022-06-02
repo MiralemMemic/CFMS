@@ -1,10 +1,16 @@
 package com.project.notification.service;
 
+import com.commondtos.dto.MessageRequestDto;
+import com.commondtos.dto.NotificationRequestDto;
+import com.commondtos.event.MessageEvent;
+import com.commondtos.event.NotificationEvent;
+import com.commondtos.event.NotificationStatus;
 import com.project.notification.exception.ResourceNotFoundException;
 import com.project.notification.model.Notification;
 import com.project.notification.model.NotifierMessage;
 import com.project.notification.model.User;
 import com.project.notification.repository.NotificationRepository;
+import com.project.notification.repository.UserTransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +30,9 @@ public class NotificationService {
 
     @Autowired
     private NotificationRepository notificationRepository;
+
+    @Autowired
+    private UserTransactionRepository userTransactionRepository;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -68,5 +77,22 @@ public class NotificationService {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    public NotificationEvent newMessageEvent(MessageEvent messageEvent) {
+
+        MessageRequestDto messageRequestDto = messageEvent.getMessageRequestDto();
+
+        NotificationRequestDto notificationRequestDto = new NotificationRequestDto(messageRequestDto.getId(), messageRequestDto.getReceiver(),
+                messageRequestDto.getContent(), messageRequestDto.getSender());
+
+        return new NotificationEvent(notificationRequestDto, NotificationStatus.NOTIFICATION_COMPLETED);
+
+   //     notificationRepository.findAll().stream().filter(n -> n.getJail() == messageRequestDto.getReceiver())
+   //             .map
+
+    }
+
+    public void cancelMessageEvent(MessageEvent messageEvent) {
     }
 }

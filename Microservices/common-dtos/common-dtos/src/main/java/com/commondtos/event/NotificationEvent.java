@@ -1,18 +1,20 @@
 package com.commondtos.event;
 
-import com.commondtos.dto.UserRequestDto;
+import com.commondtos.dto.NotificationRequestDto;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor
-public class UserEvent implements Event{
+@Data
+public class NotificationEvent implements Event{
 
     private UUID eventId = UUID.randomUUID();
     private Date eventDate = new Date();
-    private UserRequestDto userRequestDto;
-    private UserStatus userStatus;
+    private NotificationRequestDto notificationRequestDto;
+    private NotificationStatus userStatus;
 
 
     @Override
@@ -26,8 +28,8 @@ public class UserEvent implements Event{
     }
 
 
-    public UserEvent(UserRequestDto userRequestDto, UserStatus userStatus) {
-        this.userRequestDto = userRequestDto;
+    public NotificationEvent(NotificationRequestDto notificationRequestDto, NotificationStatus userStatus) {
+        this.notificationRequestDto = notificationRequestDto;
         this.userStatus = userStatus;
     }
 }

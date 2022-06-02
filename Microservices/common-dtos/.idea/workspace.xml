@@ -5,8 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86d8d5b6-5ce2-4648-aacb-d82290943ae7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/event/NotificationStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../message-service/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/config/NotificationConsumerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/model/NotificationTransaction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/repository/UserTransactionRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../message-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../message-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/dto/UserRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/dto/NotificationRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/event/MessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/event/MessageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/event/UserEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/event/NotificationEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-dtos/src/main/java/com/commondtos/event/UserStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../discovery-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../discovery-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/out/production/main/com/commondtos/dto/UserRequestDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/out/production/main/com/commondtos/event/MessageEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../message-service/out/production/main/com/commondtos/event/MessageEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/out/production/main/com/commondtos/event/UserEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/out/production/main/com/commondtos/event/UserStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/interceptor/NotificationInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/interceptor/NotificationInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/src/main/java/com/project/notification/service/NotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notification-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../notification-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../user-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +93,8 @@
       <workItem from="1653581524254" duration="7000" />
       <workItem from="1653582936965" duration="60000" />
       <workItem from="1654121990746" duration="1116000" />
+      <workItem from="1654164775708" duration="818000" />
+      <workItem from="1654191280679" duration="1534000" />
     </task>
     <servers />
   </component>

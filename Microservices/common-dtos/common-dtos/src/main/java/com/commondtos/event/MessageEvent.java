@@ -1,12 +1,14 @@
 package com.commondtos.event;
 
 import com.commondtos.dto.MessageRequestDto;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.UUID;
 
 @NoArgsConstructor
+@Data
 public class MessageEvent implements Event{
 
     private UUID eventId = UUID.randomUUID();
