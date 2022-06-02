@@ -1,3 +1,4 @@
+/*
 package com.project.user.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -196,7 +197,7 @@ class UserControllerIntegrationTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andReturn();
-    }*/
+    }
 
 
     @Test
@@ -223,7 +224,7 @@ class UserControllerIntegrationTest {
                 .andExpect(status().isOk());
     }
 
- /*   @Test
+    @Test
     @DisplayName("Should not Post  - /api/users/")
     public void testPost1() throws Exception {
 
@@ -240,7 +241,8 @@ class UserControllerIntegrationTest {
         this.mockMvc.perform(builder)
                 .andExpect(status().is4xxClientError());
     }
-*/
+
 
 
 }
+*/
