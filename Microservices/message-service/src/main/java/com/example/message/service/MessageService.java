@@ -1,5 +1,6 @@
 package com.example.message.service;
 
+import com.commondtos.event.MessageStatus;
 import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.FieldError;
 
 import java.util.HashMap;
@@ -21,6 +23,8 @@ public class MessageService {
 
     @Autowired
     private AmqpTemplate rabbitTemplate;
+    @Autowired
+    private MessageStatusPublisher messageStatusPublisher;
 
     @Autowired
     private MessageRepository messageRepository;
@@ -40,8 +44,11 @@ public class MessageService {
         return messageRepository.findAll();
     }
 
+    @Transactional
     public ResponseEntity<String> createMessage(Message message){
         messageRepository.save(message);
+        messageStatusPublisher.publishMessageEvent(message, MessageStatus.MESSAGE_CREATED);
+
         return ResponseEntity.ok("Message sent");
     }
 

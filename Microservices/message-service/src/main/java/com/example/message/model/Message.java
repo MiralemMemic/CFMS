@@ -1,5 +1,6 @@
 package com.example.message.model;
 
+import com.commondtos.event.MessageStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
@@ -29,4 +30,7 @@ public class Message {
     @NotBlank(message =  "The message is required")
     @Column(name = "content")
     private String content;
+
+    @Enumerated(EnumType.STRING)
+    private MessageStatus messageStatus;
 }

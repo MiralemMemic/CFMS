@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition : messageSupplier
+      bindings:
+        orderSupplier-out-0:
+          destination: message-event
+
+server:
+  port: 8081
