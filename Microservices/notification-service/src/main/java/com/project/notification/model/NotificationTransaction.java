@@ -14,6 +14,7 @@ import javax.persistence.Id;
 public class NotificationTransaction {
 
     @Id
-    private Integer messageId;
-    private int userId;
+    private long userId;
+
+    private long receiver;
 }

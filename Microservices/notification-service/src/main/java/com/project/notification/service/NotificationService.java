@@ -7,6 +7,7 @@ import com.commondtos.event.NotificationEvent;
 import com.commondtos.event.NotificationStatus;
 import com.project.notification.exception.ResourceNotFoundException;
 import com.project.notification.model.Notification;
+import com.project.notification.model.NotificationTransaction;
 import com.project.notification.model.NotifierMessage;
 import com.project.notification.model.User;
 import com.project.notification.repository.NotificationRepository;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,7 +34,7 @@ public class NotificationService {
     private NotificationRepository notificationRepository;
 
     @Autowired
-    private UserTransactionRepository userTransactionRepository;
+    private UserTransactionRepository notificationTransactionRepository;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -79,6 +81,7 @@ public class NotificationService {
         return errors;
     }
 
+    @Transactional
     public NotificationEvent newMessageEvent(MessageEvent messageEvent) {
 
         MessageRequestDto messageRequestDto = messageEvent.getMessageRequestDto();
@@ -86,13 +89,28 @@ public class NotificationService {
         NotificationRequestDto notificationRequestDto = new NotificationRequestDto(messageRequestDto.getId(), messageRequestDto.getReceiver(),
                 messageRequestDto.getContent(), messageRequestDto.getSender());
 
-        return new NotificationEvent(notificationRequestDto, NotificationStatus.NOTIFICATION_COMPLETED);
+        if(messageRequestDto.getSender() != messageRequestDto.getReceiver()){
+            notificationTransactionRepository.save(new NotificationTransaction(messageRequestDto.getSender(),messageRequestDto.getReceiver()));
+            notificationRepository.save(new Notification(messageRequestDto.getId(),(int) messageRequestDto.getReceiver(),messageRequestDto.getContent(), messageRequestDto.getSender()));
+            return new NotificationEvent(notificationRequestDto, NotificationStatus.NOTIFICATION_COMPLETED);
+        }else{
+            return new NotificationEvent(notificationRequestDto, NotificationStatus.NOTIFICATION_FAILED);
+        }
+
 
    //     notificationRepository.findAll().stream().filter(n -> n.getJail() == messageRequestDto.getReceiver())
    //             .map
 
     }
-
+    @Transactional
     public void cancelMessageEvent(MessageEvent messageEvent) {
+        notificationTransactionRepository.findById((int)messageEvent.getMessageRequestDto().getSender())
+                .ifPresent(notificationTransaction -> {
+                    notificationTransactionRepository.delete(notificationTransaction);
+                });
+        notificationRepository.findById(messageEvent.getMessageRequestDto().getSender())
+                .ifPresent(notification -> {
+                    notificationRepository.delete(notification);
+                });
     }
 }

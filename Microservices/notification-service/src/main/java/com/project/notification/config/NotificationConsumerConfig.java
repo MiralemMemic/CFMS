@@ -15,17 +15,16 @@ import java.util.function.Function;
 
 @Configuration
 public class NotificationConsumerConfig {
-/*
+
     @Autowired
     private NotificationService notificationService;
 
     @Bean
     public Function<Flux<MessageEvent>, Flux<NotificationEvent>> notificationProcessor() {
-        Function<Flux<MessageEvent>, Flux<NotificationEvent>> fluxFluxFunction = (Function<Flux<MessageEvent>, Flux<NotificationEvent>>) messageEventFlux -> messageEventFlux.flatMap(this::processNotification);
-        return fluxFluxFunction;
+        return  messageEventFlux -> messageEventFlux.flatMap(this::processNotification);
     }
 
-    private Mono<MessageEvent> processNotification(MessageEvent messageEvent) {
+    private Mono<NotificationEvent> processNotification(MessageEvent messageEvent) {
 
         if(MessageStatus.MESSAGE_CREATED.equals(messageEvent.getMessageStatus())){
             return  Mono.fromSupplier(()->this.notificationService.newMessageEvent(messageEvent));
@@ -33,6 +32,5 @@ public class NotificationConsumerConfig {
             return Mono.fromRunnable(()->this.notificationService.cancelMessageEvent(messageEvent));
         }
     }
-    }*/
-
 }
+

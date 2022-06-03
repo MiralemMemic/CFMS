@@ -2,12 +2,12 @@ spring:
   cloud:
     stream:
       function:
-        definition : messageSupplier;notificationEventConsumer
+        definition : notificationProcessor
       bindings:
-        messageSupplier-out-0:
+        notificationProcessor-in-0:
           destination: message-event
-        notificationEventConsumer-in-0:
+        notificationProcessor-out-0:
           destination: notification-event
 
 server:
-  port: 8081
+  port: 8082
