@@ -11,7 +11,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class ApiGatewayServiceApplication {
-
+/*
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration corsConfig = new CorsConfiguration();
@@ -24,7 +24,7 @@ public class ApiGatewayServiceApplication {
 		source.registerCorsConfiguration("/**", corsConfig);
 		return source;
 	}
-
+*/
 	public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayServiceApplication.class, args);
 	}

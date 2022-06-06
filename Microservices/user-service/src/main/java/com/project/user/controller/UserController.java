@@ -29,7 +29,7 @@ import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("api/v1/users")
 public class UserController {
 
     private static Logger log = LoggerFactory.getLogger(UserController.class);
@@ -40,18 +40,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping()
     public List<User> getAllUsers(){
         log.info("UserController - getAllUsers");
         return userService.getAllUsers();
     }
 
-    // build create user REST API
-    // build get user by id REST API
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable  long id){
         log.info("UserController - getUserById");
         return userService.getUserById(id);
+    }
+
+    @GetMapping("/name/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username){
+        log.info("UserController - getUserByUsername");
+        return userService.getUserByUsername(username);
     }
 
     @PostMapping
