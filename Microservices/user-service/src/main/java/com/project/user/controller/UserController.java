@@ -29,7 +29,7 @@ import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("api/v1/users")
 public class UserController {
 
     private static Logger log = LoggerFactory.getLogger(UserController.class);

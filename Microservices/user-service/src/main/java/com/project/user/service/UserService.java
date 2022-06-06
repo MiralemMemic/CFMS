@@ -41,8 +41,8 @@ public class UserService {
     // build get user by id REST API
 
     public ResponseEntity<User> getUserById(long id){
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
+        User user = userRepository.findById(id).orElse(null);
+                //.orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
         return ResponseEntity.ok(user);
     }
 
