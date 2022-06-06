@@ -46,6 +46,13 @@ public class UserService {
         return ResponseEntity.ok(user);
     }
 
+    public ResponseEntity<User> getUserByUsername(String username){
+        User user = userRepository.findUserByUsername(username);
+        if(user == null)
+                throw new ResourceNotFoundException("User not exist with username:" + username);
+        return ResponseEntity.ok(user);
+    }
+
     public ResponseEntity<UserMessage> getUsersSentMessages(long id){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
