@@ -1,4 +1,3 @@
-#!/bin/sh
-# wait-for-postgres.sh
 
-sleep 30
+
+ping -n 29 127.0.0.1 >nul
