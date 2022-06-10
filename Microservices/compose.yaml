@@ -1,0 +1,15 @@
+services:
+  spring-service:
+    build: ./spring-cloud-config-server/spring-cloud-config-server
+    ports:
+      - 8888:8888
+    environment:
+      - spring.cloud.config.uri=http://host.docker.internal:8888
+  discovery-service:
+    build: ./discovery-service
+    ports:
+      - 8761:8761
+    depends_on:
+      - spring-service
+    environment:
+      - spring.cloud.config.uri=http://host.docker.internal:8888
