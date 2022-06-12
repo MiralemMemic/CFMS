@@ -17,17 +17,12 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private RestTemplate restTemplate;
-/*
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("username je " + username);
         ResponseEntity<UserResponse> responseEntity = restTemplate.getForEntity("http://localhost:8082/api/v1/users/name/" + username, UserResponse.class);
         UserResponse userResponse = responseEntity.getBody();
+        System.out.println("pronadjeni user je " + userResponse);
         return new User(userResponse.getUsername(), userResponse.getPassword(), new ArrayList<>());
-    }
-*/
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return new User("foo", "foo",
-                new ArrayList<>());
     }
 }

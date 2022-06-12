@@ -41,8 +41,8 @@ public class UserService {
     // build get user by id REST API
 
     public ResponseEntity<User> getUserById(long id){
-        User user = userRepository.findById(id).orElse(null);
-                //.orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not exist with id:" + id));
         return ResponseEntity.ok(user);
     }
 
@@ -95,14 +95,14 @@ public class UserService {
     }
 
     // build delete user REST API
-    public ResponseEntity<HttpStatus> deleteUser(long id){
+    public ResponseEntity<String> deleteUser(long id){
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not exist with id: " + id));
 
         userRepository.delete(user);
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok("User with id " + id + " is successfully deleted.");
 
     }
 
