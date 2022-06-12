@@ -91,7 +91,7 @@ public class UserController {
 
     // build delete user REST API
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable long id){
+    public ResponseEntity<String> deleteUser(@PathVariable long id){
         log.info("UserConstroller - deleteUser");
         return userService.deleteUser(id);
     }
