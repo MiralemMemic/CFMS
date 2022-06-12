@@ -2,6 +2,7 @@ package com.project.authservice;
 
 import com.project.authservice.models.AuthenticationRequest;
 import com.project.authservice.models.AuthenticationResponse;
+import com.project.authservice.models.UserResponse;
 import com.project.authservice.services.MyUserDetailsService;
 import com.project.authservice.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/v1/auth")
@@ -53,12 +56,24 @@ class HelloWorldController {
     }
 
     @GetMapping( "/profile")
-    public String profile() {
+    public ResponseEntity<?> profile(HttpServletRequest request) {
 
-        //treba izvuci username iz tokena a token je u headeru
-        //otici resttemplate i naci usera po tom imenu
-        //vratit usera
-        return "Hello World";
+        final String authorizationHeader = request.getHeader("Authorization");
+
+        String username = null;
+        String jwt = null;
+
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            jwt = authorizationHeader.substring(7);
+            username = jwtTokenUtil.extractUsername(jwt);
+        }
+
+        if(username!=null) {
+            UserResponse userResponse = userDetailsService.getLoggedInUser(username);
+            return ResponseEntity.ok(userResponse);
+        }
+
+        return (ResponseEntity<?>) ResponseEntity.notFound();
     }
 
     @GetMapping( "/load")
