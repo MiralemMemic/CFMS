@@ -23,7 +23,7 @@ services:
       retries: 3
       start_period: 20s
   api-gateway-service:
-    build: ./api-gateway-service/api-gateway-service
+    build: ./api-gateway-service
     ports:
       - "9000:9000"
     depends_on:
