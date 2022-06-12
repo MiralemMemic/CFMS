@@ -20,7 +20,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("username je " + username);
-        ResponseEntity<UserResponse> responseEntity = restTemplate.getForEntity("http://localhost:8082/api/v1/users/name/" + username, UserResponse.class);
+        ResponseEntity<UserResponse> responseEntity = restTemplate.getForEntity("http://host.docker.internal:8082/api/v1/users/name/" + username, UserResponse.class);
         UserResponse userResponse = responseEntity.getBody();
         System.out.println("pronadjeni user je " + userResponse);
         return new User(userResponse.getUsername(), userResponse.getPassword(), new ArrayList<>());

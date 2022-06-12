@@ -52,6 +52,15 @@ class HelloWorldController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 
+    @GetMapping( "/profile")
+    public String profile() {
+
+        //treba izvuci username iz tokena a token je u headeru
+        //otici resttemplate i naci usera po tom imenu
+        //vratit usera
+        return "Hello World";
+    }
+
     @GetMapping( "/load")
     public String load() {
         return "Loaded Auth Service";
