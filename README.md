@@ -47,7 +47,7 @@ Prilikom pokretanja projekta preko Docker compose neophodno je izvršiti sljede�
   ```
 - Naredna komanda je docker-compose up, koja agregira izlaz svakog kontejnera. Kada naredba završi, svi kontejneri se zaustavljaju. Pokretanje docker-compose up --detach pokreće kontejnere u pozadini i ostavlja ih da rade.
   ```
-  docker-compose up-d
+  docker-compose up -d
   ```
 
 
