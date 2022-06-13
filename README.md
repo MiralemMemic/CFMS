@@ -10,7 +10,7 @@ Correctional facility management system
 ## Opis teme
 <div style="text-align: justify ">Kazneno-popravni zavod se može podijeliti na sljedeće odjele: osoblje i zatvorenici. Da bi objekat mogao da funkcioniše potrebno je osoblje. Organizacija osoblja uključuje komunikaciju između članova osoblja, pristup informacijama u skladu sa nivoom provjere, dokumentaciju svakog člana osoblja i upravljanje zavodom za osoblje višeg nivoa. Kao što je navedeno, članovi osoblja su podijeljeni prema ulozi i nivou pristupa, pri čemu osoblje nižeg nivoa, kao što su čuvari, nije u mogućnosti da stupi u interakciju sa aspektima višeg nivoa u zatvoru, kao što su upravljanje ili komunikacija sa drugim ustanovama. Zbog toga su, međutim, viši nivoi osoblja, kao što je upravnik, takođe odgovorni za veći dio efektivnog rada objekta. Takve odgovornosti uključuju upravljanje uslugama objekta i upravljanje krizama. Što se tiče zatvorenika, uzima se u obzir organizacija i dokumentacija. Sve dostupne informacije o licu koje je postalo zatvorenik moraju biti dostupne svim relevantnim članovima osoblja. Nakon što se zatvorenik dokumentuje, on se može smjestiti u ćeliju za zadržavanje, a podaci koji se odnose na njihovu kaznu moraju biti evidentirani.</div>
 
-## Uputstva za pokretanje pojedinačnih mikroservis preko Dockera
+## Uputstva za pokretanje pojedinačnih mikroservisa preko Dockera
 Prilikom pokretanja projekta preko Dockera neophodno je izvršiti sljedeće korake: 
 
 - mvn clean install govori Mavenu da izvrši fazu čišćenja u svakom modulu prije nego što pokrene fazu instalacije za svaki modul. Ovo čini brisanje svih    kompajliranih datoteka koje imate, pazeći da zaista kompajlirate svaki modul od nule.
@@ -36,7 +36,7 @@ Prilikom pokretanja projekta preko Dockera neophodno je izvršiti sljedeće kora
   ```
 
 ## Uputstva za pokretanje projekta preko Dockera (docker compose) 
-Docker compose je alat koji je razvijen da pomogne u definiranju i dijeljenju aplikacija s više kontejnera. Sa dokcer compose, možemo kreirati YAML datoteku za definiranje usluga i jednom komandom možemo sve pokrenuti ili zaustaviti (što ujedno predstavljaključnu razliku u odnosu na Dockerfile.
+Docker compose je alat koji je razvijen da pomogne u definiranju i dijeljenju aplikacija s više kontejnera. Sa docker compose, možemo kreirati YAML datoteku za definiranje usluga i jednom komandom možemo sve pokrenuti ili zaustaviti (što ujedno predstavlja ključnu razliku u odnosu na Dockerfile).
 
 Prilikom pokretanja projekta preko Docker compose neophodno je izvršiti sljedeće korake: 
 
