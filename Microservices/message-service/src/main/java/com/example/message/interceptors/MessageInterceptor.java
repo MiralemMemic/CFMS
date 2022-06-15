@@ -37,7 +37,7 @@ public class MessageInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        int status = response.getStatus();
+        //int status = response.getStatus();
 
         //po potrebi uključiti za GRPC
      /* InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);

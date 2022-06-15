@@ -1,3 +1,5 @@
+/*
+
 package com.example.message.config;
 
 import org.springframework.amqp.core.*;
@@ -49,3 +51,4 @@ public class RabbitMQConfiguration {
             return rabbitTemplate;
         }
 }
+*/

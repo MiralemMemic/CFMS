@@ -1,10 +1,9 @@
 package com.project.notification.config;
 
-import com.commondtos.event.MessageEvent;
-import com.commondtos.event.MessageStatus;
-import com.commondtos.event.NotificationEvent;
-
 import com.project.notification.service.NotificationService;
+import commondtos.event.MessageEvent;
+import commondtos.event.MessageStatus;
+import commondtos.event.NotificationEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

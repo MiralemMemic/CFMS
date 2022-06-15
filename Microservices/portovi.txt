@@ -1,0 +1,7 @@
+8888 spring cloud config
+8761 discovery (eureka)
+9000 api gateway
+8080 auth
+8082 user
+8081 message
+3000 frontend

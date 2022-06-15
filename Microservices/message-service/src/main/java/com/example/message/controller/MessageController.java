@@ -1,34 +1,25 @@
 package com.example.message.controller;
 
 
-import com.commondtos.event.MessageStatus;
-import com.example.message.exception.ResourceNotFoundException;
+import commondtos.event.MessageStatus;
 import com.example.message.model.Message;
-import com.example.message.repository.MessageRepository;
 import com.example.message.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Column;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/messages")
+@RequestMapping("api/v1/messages")
 public class MessageController {
 
     private static Logger log = LoggerFactory.getLogger(MessageController.class);
@@ -67,7 +58,7 @@ public class MessageController {
     }
 
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Message> getMessageById(@PathVariable long id){
         log.info("MessageController - getMessageById");
         return messageService.getMessageById(id);
@@ -83,7 +74,7 @@ public class MessageController {
         return messageService.getReceivedMessagesByUserId(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteMessage(@PathVariable long id){
         return messageService.deleteMessage(id);
     }

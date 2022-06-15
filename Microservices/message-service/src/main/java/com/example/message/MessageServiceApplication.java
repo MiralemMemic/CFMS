@@ -1,5 +1,6 @@
 package com.example.message;
 
+//import com.example.message.config.MessageStatusUpdateHandler;
 import com.example.message.repository.MessageRepository;
 import com.example.message.service.MessageService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -13,15 +14,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
-//@SpringBootApplication
+@SpringBootApplication
 @Configuration
-@EnableAutoConfiguration
-@ComponentScan
+//@EnableAutoConfiguration
+//@ComponentScan
 @OpenAPIDefinition
 public class MessageServiceApplication implements CommandLineRunner {
 
 	@Bean
-	public MessageService messageService(){
+	public MessageService messageServices(){
 		return new MessageService();
 	}
 

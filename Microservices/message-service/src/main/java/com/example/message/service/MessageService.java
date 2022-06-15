@@ -1,10 +1,10 @@
 package com.example.message.service;
 
-import com.commondtos.event.MessageStatus;
+import commondtos.event.MessageStatus;
 import com.example.message.exception.ResourceNotFoundException;
 import com.example.message.model.Message;
 import com.example.message.repository.MessageRepository;
-import org.springframework.amqp.core.AmqpTemplate;
+//import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
@@ -21,22 +21,22 @@ import java.util.Map;
 @Service
 public class MessageService {
 
-    @Autowired
-    private AmqpTemplate rabbitTemplate;
-    @Autowired
-    private MessageStatusPublisher messageStatusPublisher;
+//    @Autowired
+//    private AmqpTemplate rabbitTemplate;
+//    @Autowired
+//    private MessageStatusPublisher messageStatusPublisher;
 
     @Autowired
     private MessageRepository messageRepository;
 
-    @Value("${rabbitmq.exchange}")
-    private String exchange;
-
-    @Value("${rabbitmq.routingkey}")
-    private String routingkey;
+//    @Value("${rabbitmq.exchange}")
+//    private String exchange;
+//
+//    @Value("${rabbitmq.routingkey}")
+//    private String routingkey;
 
     public void send(Message message) {
-        rabbitTemplate.convertAndSend(exchange, routingkey, message);
+//        rabbitTemplate.convertAndSend(exchange, routingkey, message);
         System.out.println("Send msg = " + message);
     }
 
@@ -47,7 +47,7 @@ public class MessageService {
     @Transactional
     public ResponseEntity<String> createMessage(Message message){
         messageRepository.save(message);
-        messageStatusPublisher.publishMessageEvent(message, MessageStatus.MESSAGE_CREATED);
+//        messageStatusPublisher.publishMessageEvent(message, MessageStatus.MESSAGE_CREATED);
 
         return ResponseEntity.ok("Message sent");
     }

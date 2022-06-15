@@ -1,7 +1,7 @@
 package com.example.message.model;
 
-import com.commondtos.event.MessageStatus;
-import com.commondtos.event.NotificationStatus;
+import commondtos.event.MessageStatus;
+import commondtos.event.NotificationStatus;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;

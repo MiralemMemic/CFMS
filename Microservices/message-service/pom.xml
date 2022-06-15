@@ -43,16 +43,16 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-api</artifactId>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>org.springframework.amqp</groupId>
-			<artifactId>spring-rabbit-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.amqp</groupId>-->
+<!--			<artifactId>spring-rabbit-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -82,11 +82,11 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
-			<version>3.0.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
+<!--			<version>3.0.1</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>net.devh</groupId>
@@ -189,6 +189,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>docker-message-service</finalName>
 	</build>
 
 </project>

@@ -75,11 +75,11 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
-			<version>3.0.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-bus-amqp</artifactId>-->
+<!--			<version>3.0.1</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>net.devh</groupId>
 			<artifactId>grpc-client-spring-boot-starter</artifactId>
@@ -182,6 +182,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>docker-prisoner-service</finalName>
 	</build>
 
 	<repositories>

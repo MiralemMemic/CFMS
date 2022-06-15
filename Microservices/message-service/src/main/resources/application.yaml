@@ -8,6 +8,3 @@ spring:
           destination: message-event
         notificationEventConsumer-in-0:
           destination: notification-event
-
-server:
-  port: 8081
