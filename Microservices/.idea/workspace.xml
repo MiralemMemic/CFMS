@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0689af71-d178-4525-b6f5-85623458c5b9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system-events-ver2/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/discovery-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/discovery-service/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wait-for-it.sh" beforeDir="false" afterPath="$PROJECT_DIR$/wait-for-it.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/interceptors/MessageInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/interceptors/MessageInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system-events-ver2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/system-events-ver2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system-events-ver2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/system-events-ver2/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,13 +26,10 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Repo/CFMS/Microservices/discovery-service",
-    "nodejs_package_manager_path": "npm"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/system-events-ver2" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

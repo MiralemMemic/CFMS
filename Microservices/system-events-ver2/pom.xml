@@ -171,6 +171,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>docker-system-events-service</finalName>
 	</build>
 
 </project>
