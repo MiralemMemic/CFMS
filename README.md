@@ -53,3 +53,6 @@ Prilikom pokretanja projekta preko Docker compose neophodno je izvrÅ¡iti sljedeÄ
 
 ## Video demo aplikacije
 [Link za pristup](https://drive.google.com/drive/folders/1cmKvrfQzdEPEGF3bB8zE4pD9ahwc1c1e?usp=sharing)
+
+## Dokumentacija
+[Link za pristup]([https://drive.google.com/drive/folders/1cmKvrfQzdEPEGF3bB8zE4pD9ahwc1c1e?usp=sharing](https://drive.google.com/drive/folders/19JrbDOJkbAFhwv4lVugg9SOKbeRgk43Q?usp=sharing))
