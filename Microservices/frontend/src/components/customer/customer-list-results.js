@@ -75,13 +75,13 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{customer.cell}</TableCell>
+                  <TableCell>{customer.currentCell}</TableCell>
                   <TableCell>
                     {/* {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`} */}
-                    {customer.sentence}
+                    {customer.lengthOfSentence}
                   </TableCell>
-                  <TableCell>{customer.identification}</TableCell>
-                  <TableCell>{customer.evaluation ?? ''}</TableCell>
+                  <TableCell>{customer.identificationNumber}</TableCell>
+                  <TableCell>{customer.sentenceEvaluation ?? ''}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

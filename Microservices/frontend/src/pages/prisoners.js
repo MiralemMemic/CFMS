@@ -13,7 +13,7 @@ const Customers = () => {
   const [changeHappened, setChange] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/prisoner`).then((res) => {
+    axios.get(`http://localhost:9000/api/v1/prisoners`).then((res) => {
       const persons = res.data;
       setPrisoners(persons);
     });

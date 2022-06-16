@@ -19,7 +19,7 @@ import { SeverityPill } from '../severity-pill';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const RequestListResults = ({ customers, handler, ...rest }) => {
+export const RequestListResults = ({ logged, customers, handler, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(25);
   const [page, setPage] = useState(0);
@@ -78,10 +78,9 @@ export const RequestListResults = ({ customers, handler, ...rest }) => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Description</TableCell>
+                  <TableCell>Content</TableCell>
                   <TableCell>Sender</TableCell>
                   <TableCell>Status</TableCell>
-                  <TableCell>Options</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -106,23 +105,23 @@ export const RequestListResults = ({ customers, handler, ...rest }) => {
                           color="textPrimary"
                           variant="body1"
                         >
-                          {request.text}
+                          {request.content}
                         </Typography>
                       </Box>
                     </TableCell>
-                    <TableCell key={index}>{request.user}</TableCell>
+                    <TableCell key={index}>{request.receiver}</TableCell>
                     <TableCell>
                       <SeverityPill
                         key={index}
                         color={
-                          request.status == 'Awaiting approval'
+                          request.messageStatus == 'MESSAGE_CREATED'
                             ? 'warning'
-                            : request.status == 'Completed'
-                            ? 'primary'
-                            : 'error'
+                            : 'primary'
                         }
                       >
-                        {request.status}
+                        {request.messageStatus === 'MESSAGE_CREATED'
+                          ? 'received'
+                          : 'sent'}
                       </SeverityPill>
                     </TableCell>
                     <TableCell>

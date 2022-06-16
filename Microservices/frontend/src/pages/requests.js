@@ -12,11 +12,15 @@ const Requests = () => {
 
   const [changes, setChanges] = useState(false);
 
+  const [idUlogovanog, setUlogovani] = useState(0);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const { access_token } = JSON.parse(localStorage.getItem('token'));
+      const { id } = JSON.parse(localStorage.getItem('profileData'));
+      setUlogovani(id);
       axios
-        .get(`http://localhost:4000/api/request`, {
+        .get(`http://localhost:9000/api/v1/messages/received/${id}`, {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
@@ -59,7 +63,11 @@ const Requests = () => {
         <Container maxWidth={false}>
           <RequestListToolbar handler={changeHandler} />
           <Box sx={{ mt: 3 }}>
-            <RequestListResults customers={requests} handler={changeHandler} />
+            <RequestListResults
+              logged={idUlogovanog}
+              customers={requests}
+              handler={changeHandler}
+            />
           </Box>
         </Container>
       </Box>

@@ -7,28 +7,28 @@ import {
   InputAdornment,
   SvgIcon,
   Typography,
-} from "@mui/material";
-import { Search as SearchIcon } from "../../icons/search";
-import { Upload as UploadIcon } from "../../icons/upload";
-import { Download as DownloadIcon } from "../../icons/download";
-import * as React from "react";
-import { useState } from "react";
+} from '@mui/material';
+import { Search as SearchIcon } from '../../icons/search';
+import { Upload as UploadIcon } from '../../icons/upload';
+import { Download as DownloadIcon } from '../../icons/download';
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 export const RequestListToolbar = (props) => (
   <Box {...props}>
     <Box
       sx={{
-        alignItems: "center",
-        display: "flex",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
         m: -1,
       }}
     >
       <Typography sx={{ m: 1 }} variant="h4">
         Messages
       </Typography>
-      <Box sx={{ m: 1, display: "flex" }}>
+      <Box sx={{ m: 1, display: 'flex' }}>
         {/*
         <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
           Export
@@ -65,16 +65,18 @@ export const RequestListToolbar = (props) => (
   </Box>
 );
 
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 export const FormDialog = (handler) => {
   const [open, setOpen] = React.useState(false);
 
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
+  const [receiver, setReceiver] = useState(9999);
+  const [loggedUser, setLoggedUser] = useState(1000);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -88,14 +90,34 @@ export const FormDialog = (handler) => {
     setDescription(e.target.value);
   };
 
+  const handleReceiver = (e) => {
+    setReceiver(e.target.value);
+  };
+
+  const [users, setUsers] = useState([]);
+
+  const [changeHappened, setChange] = useState(false);
+
+  useEffect(() => {
+    axios.get(`http://localhost:9000/api/v1/users`).then((res) => {
+      const persons = res.data;
+      setUsers(persons);
+    });
+
+    const { id } = JSON.parse(localStorage.getItem('profileData'));
+    setLoggedUser(id);
+  }, [changeHappened]);
+
   const handleAdd = () => {
-    if (typeof window !== "undefined") {
-      const { access_token } = JSON.parse(localStorage.getItem("token"));
+    if (typeof window !== 'undefined') {
+      const { access_token } = JSON.parse(localStorage.getItem('token'));
       axios
         .post(
-          `http://localhost:4000/api/request`,
+          `http://localhost:9000/api/v1/messages`,
           {
-            text: description,
+            receiver: receiver,
+            sender: loggedUser,
+            content: description,
           },
           {
             headers: {
@@ -113,25 +135,44 @@ export const FormDialog = (handler) => {
   return (
     <div>
       <Button color="primary" variant="contained" onClick={handleClickOpen}>
-        Create Message
+        Send Message
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Create New Message</DialogTitle>
+        <DialogTitle>Send New Message</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            To create a message please fill out the description below.
+            To send a message please fill out the description below.
           </DialogContentText>
           <TextField
+            multiline
             onChange={handleChange}
             autoFocus
             margin="dense"
-            id="description"
+            id="content"
             value={description}
-            label="Description"
+            label="Content"
             type="text"
             fullWidth
             variant="standard"
           />
+
+          <InputLabel id="select-label">Receiver</InputLabel>
+          <FormControl fullWidth>
+            <Select
+              id="select-label"
+              value={receiver}
+              label="Receiver"
+              onChange={handleReceiver}
+            >
+              {users.map((user) =>
+                loggedUser != user.id ? (
+                  <MenuItem value={user.id}>
+                    {user.firstName + ' ' + user.lastName}
+                  </MenuItem>
+                ) : null
+              )}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
@@ -142,11 +183,12 @@ export const FormDialog = (handler) => {
   );
 };
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import axios from "axios";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import axios from 'axios';
+import { Form } from 'formik';
 
 /*
 export const SelectStatus = () => {
