@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.FieldError;
+//import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,9 @@ public class MessageService {
 
     @Autowired
     private MessageRepository messageRepository;
+
+//    @Autowired
+//    private RestTemplate restTemplate;
 
 //    @Value("${rabbitmq.exchange}")
 //    private String exchange;
@@ -62,6 +66,12 @@ public class MessageService {
 
     public ResponseEntity<Message> getMessageById(long id){
         Message message = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
+        return ResponseEntity.ok(message);
+    }
+
+    public ResponseEntity<Message> patchMessageById(long id, MessageStatus status){
+        Message message = messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message not found"));
+        message.setMessageStatus(status);
         return ResponseEntity.ok(message);
     }
 

@@ -7,28 +7,28 @@ import {
   InputAdornment,
   SvgIcon,
   Typography,
-} from '@mui/material';
-import { Search as SearchIcon } from '../../icons/search';
-import { Upload as UploadIcon } from '../../icons/upload';
-import { Download as DownloadIcon } from '../../icons/download';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+} from "@mui/material";
+import { Search as SearchIcon } from "../../icons/search";
+import { Upload as UploadIcon } from "../../icons/upload";
+import { Download as DownloadIcon } from "../../icons/download";
+import * as React from "react";
+import { useState, useEffect } from "react";
 
 export const RequestListToolbar = (props) => (
   <Box {...props}>
     <Box
       sx={{
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
+        alignItems: "center",
+        display: "flex",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
         m: -1,
       }}
     >
       <Typography sx={{ m: 1 }} variant="h4">
         Messages
       </Typography>
-      <Box sx={{ m: 1, display: 'flex' }}>
+      <Box sx={{ m: 1, display: "flex" }}>
         {/*
         <Button startIcon={<DownloadIcon fontSize="small" />} sx={{ mr: 1 }}>
           Export
@@ -65,17 +65,17 @@ export const RequestListToolbar = (props) => (
   </Box>
 );
 
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 export const FormDialog = (handler) => {
   const [open, setOpen] = React.useState(false);
 
-  const [description, setDescription] = useState('');
-  const [receiver, setReceiver] = useState(9999);
+  const [description, setDescription] = useState("");
+  const [receiver, setReceiver] = useState({});
   const [loggedUser, setLoggedUser] = useState(1000);
 
   const handleClickOpen = () => {
@@ -104,20 +104,24 @@ export const FormDialog = (handler) => {
       setUsers(persons);
     });
 
-    const { id } = JSON.parse(localStorage.getItem('profileData'));
+    const { id } = JSON.parse(localStorage.getItem("profileData"));
     setLoggedUser(id);
   }, [changeHappened]);
 
   const handleAdd = () => {
-    if (typeof window !== 'undefined') {
-      const { access_token } = JSON.parse(localStorage.getItem('token'));
+    if (typeof window !== "undefined") {
+      const { firstName, lastName } = JSON.parse(
+        localStorage.getItem("profileData")
+      );
+      const { access_token } = JSON.parse(localStorage.getItem("token"));
       axios
         .post(
           `http://localhost:9000/api/v1/messages`,
           {
-            receiver: receiver,
+            receiver: receiver.id,
             sender: loggedUser,
             content: description,
+            senderFullName: firstName + " " + lastName,
           },
           {
             headers: {
@@ -166,8 +170,8 @@ export const FormDialog = (handler) => {
             >
               {users.map((user) =>
                 loggedUser != user.id ? (
-                  <MenuItem value={user.id}>
-                    {user.firstName + ' ' + user.lastName}
+                  <MenuItem value={user}>
+                    {user.firstName + " " + user.lastName}
                   </MenuItem>
                 ) : null
               )}
@@ -183,12 +187,12 @@ export const FormDialog = (handler) => {
   );
 };
 
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import axios from 'axios';
-import { Form } from 'formik';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import axios from "axios";
+import { Form } from "formik";
 
 /*
 export const SelectStatus = () => {
