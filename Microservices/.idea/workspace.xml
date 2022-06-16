@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0689af71-d178-4525-b6f5-85623458c5b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/requests/request-list-results.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/requests/request-list-results.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/requests/request-list-toolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/requests/request-list-toolbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/MessageServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/MessageServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/controller/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/controller/MessageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/model/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/config/EventConsumerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/config/EventConsumerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/config/MessagePublisherConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/config/MessagePublisherConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/config/MessageStatusUpdateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/config/MessageStatusUpdateHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/service/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/service/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/service/MessageStatusPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message/service/MessageStatusPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/src/main/java/com/project/notification/interceptor/NotificationInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/project/notification/interceptor/NotificationInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification-service/src/main/java/com/project/notification/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/project/notification/service/NotificationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system-events-ver2/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/system-events-ver2/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +32,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/auth-service/auth-service" />
-    <property name="nodejs_package_manager_path" value="npm" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Repo/CFMS/Microservices/notification-service",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,10 +50,22 @@
       <workItem from="1648638284432" duration="1000" />
       <workItem from="1648744983986" duration="42000" />
       <workItem from="1654845001658" duration="3097000" />
+      <workItem from="1655380312303" duration="2098000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

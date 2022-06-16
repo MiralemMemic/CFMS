@@ -24,8 +24,8 @@ public class MessageService {
 
 //    @Autowired
 //    private AmqpTemplate rabbitTemplate;
-//    @Autowired
-//    private MessageStatusPublisher messageStatusPublisher;
+    @Autowired
+    private MessageStatusPublisher messageStatusPublisher;
 
     @Autowired
     private MessageRepository messageRepository;
@@ -51,7 +51,7 @@ public class MessageService {
     @Transactional
     public ResponseEntity<String> createMessage(Message message){
         messageRepository.save(message);
-//        messageStatusPublisher.publishMessageEvent(message, MessageStatus.MESSAGE_CREATED);
+        messageStatusPublisher.publishMessageEvent(message, MessageStatus.MESSAGE_CREATED);
 
         return ResponseEntity.ok("Message sent");
     }

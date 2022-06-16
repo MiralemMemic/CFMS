@@ -96,11 +96,6 @@ public class NotificationService {
         }else{
             return new NotificationEvent(notificationRequestDto, NotificationStatus.NOTIFICATION_FAILED);
         }
-
-
-   //     notificationRepository.findAll().stream().filter(n -> n.getJail() == messageRequestDto.getReceiver())
-   //             .map
-
     }
     @Transactional
     public void cancelMessageEvent(MessageEvent messageEvent) {

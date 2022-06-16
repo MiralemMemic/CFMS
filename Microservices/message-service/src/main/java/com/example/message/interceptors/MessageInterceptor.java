@@ -40,7 +40,7 @@ public class MessageInterceptor implements HandlerInterceptor {
         int status = response.getStatus();
 
         //po potrebi uključiti za GRPC
-     InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);
+        InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);
         ManagedChannel channel = ManagedChannelBuilder.forAddress("host.docker.internal",9090).usePlaintext().build();
         com.project.systemeventsver2.LogServiceGrpc.LogServiceBlockingStub stub = com.project.systemeventsver2.LogServiceGrpc.newBlockingStub(channel);
         Calendar c = Calendar.getInstance();

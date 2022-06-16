@@ -40,7 +40,7 @@ public class NotificationInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         int status = response.getStatus();
         //po potrebi uključiti za GRPC
-    /*  InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);
+        InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("system-event-service",false);
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090).usePlaintext().build();
         com.project.systemeventsver2.LogServiceGrpc.LogServiceBlockingStub stub = com.project.systemeventsver2.LogServiceGrpc.newBlockingStub(channel);
         Calendar c = Calendar.getInstance();
@@ -50,7 +50,7 @@ public class NotificationInterceptor implements HandlerInterceptor {
         com.project.systemeventsver2.LogRequest request1 = com.project.systemeventsver2.LogRequest.newBuilder()
                 .setTime(time).setName("Notification").setType(request.getMethod()).setResource("notification").setResponse(resp)
                 .build();
-        com.project.systemeventsver2.LogResponse response1 = stub.log(request1);*/
+        com.project.systemeventsver2.LogResponse response1 = stub.log(request1);
 
     }
 }
