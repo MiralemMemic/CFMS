@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-gateway-service" target="11" />
       <module name="wrapper" target="1.5" />
     </bytecodeTargetLevel>
   </component>

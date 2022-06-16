@@ -54,7 +54,7 @@ export const LatestPrisoners = (props) => {
   const [prisoners, setPrisoners] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/prisoner/latest`).then((res) => {
+    axios.get(`http://localhost:9000/api/v1/prisoners/worst`).then((res) => {
       const persons = res.data;
       setPrisoners(persons);
     });
@@ -64,7 +64,7 @@ export const LatestPrisoners = (props) => {
     <Card {...props}>
       <CardHeader
         subtitle={`${prisoners.length} in total`}
-        title="Latest Prisoners"
+        title="Worst Prisoners"
       />
       <Divider />
       <List>
@@ -80,7 +80,7 @@ export const LatestPrisoners = (props) => {
             <ListItem divider={i < products.length - 1} key={product._id}>
               <ListItemAvatar>
                 <img
-                  alt={product.name}
+                  alt={product.firstName}
                   src={
                     product.image ??
                     'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/694px-Unknown_person.jpg'
@@ -92,8 +92,10 @@ export const LatestPrisoners = (props) => {
                 />
               </ListItemAvatar>
               <ListItemText
-                primary={product.name}
-                secondary={'Arrived at ' + arrivalDate}
+                primary={product.firstName + ' ' + product.lastName}
+                secondary={
+                  'Sentenced for ' + product.lengthOfSentence + ' years'
+                }
               />
             </ListItem>
           );

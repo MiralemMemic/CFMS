@@ -48,7 +48,7 @@ export const FormDialog = ({ handler }) => {
   };
 
   const handleSubmit = async () => {
-    const url = 'http://localhost:4000/api/prisoner';
+    const url = 'http://localhost:9000/api/v1/prisoners';
     const { access_token } = JSON.parse(localStorage.getItem('token'));
     const config = {
       headers: { Authorization: `Bearer ` + access_token },
@@ -59,10 +59,11 @@ export const FormDialog = ({ handler }) => {
         {
           firstName: values.firstName,
           lastName: values.lastName,
-          cell: values.cell,
-          sentence: values.sentence,
-          identification: values.identification,
-          evaluation: values.evaluation,
+          currentCell: values.cell,
+          lengthOfSentence: values.sentence,
+          identificationNumber: values.identification,
+          sentenceEvaluation: values.evaluation,
+          offense: 1,
         },
         config
       )
