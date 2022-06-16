@@ -79,19 +79,16 @@ export const IncidentListResults = ({ customers, handler, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Description</TableCell>
-                <TableCell>Sector ID</TableCell>
-                <TableCell>Prisoner ID</TableCell>
-                <TableCell>Risk</TableCell>
+                <TableCell>Information</TableCell>
+                <TableCell>Notifier</TableCell>
                 <TableCell>Status</TableCell>
-                <TableCell>Options</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {customers.slice(0, limit).map((incident, index) => (
                 <TableRow
                   hover
-                  key={incident._id}
+                  key={incident.id}
                   //selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                 >
                   <TableCell>
@@ -109,8 +106,9 @@ export const IncidentListResults = ({ customers, handler, ...rest }) => {
                       </Typography>
                     </Box>
                   </TableCell>
-                  <TableCell>{incident.sector}</TableCell>
-                  <TableCell>{incident.prisonerId}</TableCell>
+                  <TableCell>
+                    <SeverityPill color={'warning'}>Guard</SeverityPill>
+                  </TableCell>
                   <TableCell>
                     <SeverityPill
                       color={
@@ -121,31 +119,8 @@ export const IncidentListResults = ({ customers, handler, ...rest }) => {
                           : 'error'
                       }
                     >
-                      {incident.risk}
+                      Alarm
                     </SeverityPill>
-                  </TableCell>
-                  <TableCell>
-                    <SeverityPill
-                      color={
-                        incident.status == 'Warning'
-                          ? 'warning'
-                          : incident.status == 'Closed'
-                          ? 'primary'
-                          : 'error'
-                      }
-                    >
-                      {incident.status}
-                    </SeverityPill>
-                  </TableCell>
-                  <TableCell>
-                    {incident.status != 'Closed' &&
-                      (incident.user == loggedId || loggedRole == 'Warden') && (
-                        <LongMenu
-                          status={incident.status}
-                          incidentId={incident._id}
-                          changeHandler={handler}
-                        />
-                      )}
                   </TableCell>
                 </TableRow>
               ))}

@@ -14,7 +14,7 @@ const Incidents = () => {
     if (typeof window !== 'undefined') {
       const { access_token } = JSON.parse(localStorage.getItem('token'));
       axios
-        .get(`http://localhost:4000/api/incident`, {
+        .get(`http://localhost:9000/api/v1/notifications`, {
           headers: {
             Authorization: `Bearer ${access_token}`,
           },
