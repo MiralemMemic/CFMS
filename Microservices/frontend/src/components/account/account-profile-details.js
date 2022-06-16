@@ -57,28 +57,28 @@ export const AccountProfileDetails = (props) => {
     }
   }, []);
 
-  const submitChanges = () => {
-    if (typeof window != 'undefined') {
-      const { id } = JSON.parse(localStorage.getItem('profileData'));
-      const { access_token } = JSON.parse(localStorage.getItem('token'));
-      axios
-        .put(
-          `http://localhost:4000/api/user/${id}`,
-          {
-            firstName: values.firstName,
-            lastName: values.lastName,
-            email: values.email,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-            },
-          }
-        )
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
-    }
-  };
+  // const submitChanges = () => {
+  //   if (typeof window != 'undefined') {
+  //     const { id } = JSON.parse(localStorage.getItem('profileData'));
+  //     const { access_token } = JSON.parse(localStorage.getItem('token'));
+  //     axios
+  //       .put(
+  //         `http://localhost:4000/api/user/${id}`,
+  //         {
+  //           firstName: values.firstName,
+  //           lastName: values.lastName,
+  //           email: values.email,
+  //         },
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${access_token}`,
+  //           },
+  //         }
+  //       )
+  //       .then((res) => console.log(res))
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
 
   return (
     <form autoComplete="off" noValidate {...props}>
@@ -89,11 +89,12 @@ export const AccountProfileDetails = (props) => {
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
+                disabled
                 fullWidth
                 helperText="Please specify the first name"
                 label="First name"
                 name="firstName"
-                onChange={handleChange}
+                //onChange={handleChange}
                 required
                 value={values.firstName}
                 variant="outlined"
@@ -101,10 +102,11 @@ export const AccountProfileDetails = (props) => {
             </Grid>
             <Grid item md={6} xs={12}>
               <TextField
+                disabled
                 fullWidth
                 label="Last name"
                 name="lastName"
-                onChange={handleChange}
+                //onChange={handleChange}
                 required
                 value={values.lastName}
                 variant="outlined"
@@ -112,10 +114,11 @@ export const AccountProfileDetails = (props) => {
             </Grid>
             <Grid item md={12} xs={12}>
               <TextField
+                disabled
                 fullWidth
                 label="Email Address"
                 name="email"
-                onChange={handleChange}
+                //onChange={handleChange}
                 required
                 value={values.email}
                 variant="outlined"
@@ -131,9 +134,9 @@ export const AccountProfileDetails = (props) => {
             p: 2,
           }}
         >
-          <Button color="primary" variant="contained" onClick={submitChanges}>
+          {/* <Button color="primary" variant="contained" onClick={submitChanges}>
             Save details
-          </Button>
+          </Button> */}
         </Box>
       </Card>
     </form>

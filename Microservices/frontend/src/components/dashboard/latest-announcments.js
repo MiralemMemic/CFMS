@@ -1,6 +1,6 @@
-import { format } from "date-fns";
-import { v4 as uuid } from "uuid";
-import PerfectScrollbar from "react-perfect-scrollbar";
+import { format } from 'date-fns';
+import { v4 as uuid } from 'uuid';
+import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Button,
@@ -13,17 +13,17 @@ import {
   TableRow,
   TableSortLabel,
   Tooltip,
-} from "@mui/material";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { SeverityPill } from "../severity-pill";
-import axios from "axios";
-import { useState, useEffect } from "react";
+} from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { SeverityPill } from '../severity-pill';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 export const LatestAnnouncmenets = (props) => {
   const [incidents, setIncidents] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/api/incident/latest`).then((res) => {
+    axios.get(`http://localhost:9000/api/v1/notifications`).then((res) => {
       const incidents = res.data;
       setIncidents(incidents);
     });
@@ -36,43 +36,26 @@ export const LatestAnnouncmenets = (props) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Description</TableCell>
-                <TableCell>Prisoner</TableCell>
-                <TableCell sortDirection="desc">
-                  <Tooltip enterDelay={300} title="Sort">
-                    <TableSortLabel active direction="desc">
-                      Date
-                    </TableSortLabel>
-                  </Tooltip>
-                </TableCell>
+                <TableCell>Information</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {incidents.map((incident) => {
-                const date = new Date(incident.createdAt);
-                const arrivalDate =
-                  date.getDate() +
-                  "/" +
-                  (date.getMonth() + 1) +
-                  "/" +
-                  date.getFullYear();
+              {incidents.slice(0, 5).map((incident) => {
                 return (
                   <TableRow hover key={incident._id}>
                     <TableCell>{incident.text}</TableCell>
-                    <TableCell>{incident.prisonerId}</TableCell>
-                    <TableCell>{arrivalDate}</TableCell>
                     <TableCell>
                       <SeverityPill
                         color={
-                          incident.status == "Warning"
-                            ? "warning"
-                            : incident.status == "Closed"
-                            ? "primary"
-                            : "error"
+                          incident.status == 'Warning'
+                            ? 'warning'
+                            : incident.status == 'Closed'
+                            ? 'primary'
+                            : 'error'
                         }
                       >
-                        {incident.status}
+                        Alarm
                       </SeverityPill>
                     </TableCell>
                   </TableRow>
@@ -84,8 +67,8 @@ export const LatestAnnouncmenets = (props) => {
       </PerfectScrollbar>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-end",
+          display: 'flex',
+          justifyContent: 'flex-end',
           p: 2,
         }}
       >

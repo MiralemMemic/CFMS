@@ -84,6 +84,8 @@ export const FormDialog = ({ handler }) => {
             Fill the fields below to add new prisoner to Penitentiary
           </DialogContentText>
           <TextField
+            error={values.firstName.length == 0 ?? false}
+            helperText={'Please insert first name of prisoner'}
             autoFocus
             margin="dense"
             id="firstName"
@@ -96,6 +98,8 @@ export const FormDialog = ({ handler }) => {
             onChange={handleChange}
           />
           <TextField
+            error={values.lastName.length == 0 ?? false}
+            helperText={'Please insert last name of prisoner'}
             autoFocus
             margin="dense"
             id="lastName"
@@ -108,6 +112,8 @@ export const FormDialog = ({ handler }) => {
             onChange={handleChange}
           />
           <TextField
+            error={values.cell.length == 0 ?? false}
+            helperText={'Please insert prisoner cell'}
             autoFocus
             margin="dense"
             id="cell"
@@ -120,6 +126,8 @@ export const FormDialog = ({ handler }) => {
             onChange={handleChange}
           />
           <TextField
+            error={values.sentence == 0 ?? false}
+            helperText={'Please insert prisoners sentence in years'}
             autoFocus
             margin="dense"
             id="sentence"
@@ -128,10 +136,12 @@ export const FormDialog = ({ handler }) => {
             name="sentence"
             fullWidth
             variant="standard"
-            value={values.sentence}
+            value={values.lengthOfSentence}
             onChange={handleChange}
           />
           <TextField
+            error={values.firstName.length == 0 ?? false}
+            helperText={'Please prisoners ID number'}
             autoFocus
             margin="dense"
             id="identification"
@@ -140,7 +150,7 @@ export const FormDialog = ({ handler }) => {
             type="number"
             fullWidth
             variant="standard"
-            value={values.identification}
+            value={values.identificationNumber}
             onChange={handleChange}
           />
           <TextField
@@ -152,7 +162,7 @@ export const FormDialog = ({ handler }) => {
             type="text"
             fullWidth
             variant="standard"
-            value={values.evaluation}
+            value={values.sentenceEvaluation}
             onChange={handleChange}
           />
         </DialogContent>

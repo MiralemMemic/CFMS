@@ -1,6 +1,6 @@
-import PerfectScrollbar from "react-perfect-scrollbar";
-import PropTypes from "prop-types";
-import { format } from "date-fns";
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import PropTypes from 'prop-types';
+import { format } from 'date-fns';
 import {
   Avatar,
   Box,
@@ -13,22 +13,22 @@ import {
   TablePagination,
   TableRow,
   Typography,
-} from "@mui/material";
-import { getInitials } from "../../utils/get-initials";
-import { SeverityPill } from "../severity-pill";
-import { useState, useEffect } from "react";
-import axios from "axios";
+} from '@mui/material';
+import { getInitials } from '../../utils/get-initials';
+import { SeverityPill } from '../severity-pill';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const RequestListResults = ({ logged, customers, handler, ...rest }) => {
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(25);
   const [page, setPage] = useState(0);
 
-  const [loggedRole, setRole] = useState("");
+  const [loggedRole, setRole] = useState('');
 
   React.useEffect(() => {
-    if (typeof window != "undefined") {
-      const { role } = JSON.parse(localStorage.getItem("profileData"));
+    if (typeof window != 'undefined') {
+      const { role } = JSON.parse(localStorage.getItem('profileData'));
       setRole(role);
     }
   }, []);
@@ -93,8 +93,8 @@ export const RequestListResults = ({ logged, customers, handler, ...rest }) => {
                     <TableCell>
                       <Box
                         sx={{
-                          alignItems: "center",
-                          display: "flex",
+                          alignItems: 'center',
+                          display: 'flex',
                         }}
                       >
                         {/* <Avatar src={customer.image} sx={{ mr: 2 }}>
@@ -116,19 +116,19 @@ export const RequestListResults = ({ logged, customers, handler, ...rest }) => {
                       <SeverityPill
                         key={index}
                         color={
-                          request.messageStatus == "MESSAGE_CREATED"
-                            ? "warning"
-                            : "primary"
+                          request.messageStatus == 'MESSAGE_CREATED'
+                            ? 'warning'
+                            : 'primary'
                         }
                       >
-                        {request.messageStatus === "MESSAGE_CREATED"
-                          ? "received"
-                          : "sent"}
+                        {request.messageStatus === 'MESSAGE_CREATED'
+                          ? 'received'
+                          : 'sent'}
                       </SeverityPill>
                     </TableCell>
                     <TableCell>
-                      {request.status != "Completed" &&
-                        loggedRole == "Warden" && (
+                      {request.status != 'Completed' &&
+                        loggedRole == 'Warden' && (
                           <LongMenu
                             requestId={request._id}
                             changeHandler={handler}
@@ -159,13 +159,13 @@ RequestListResults.propTypes = {
   customers: PropTypes.array.isRequired,
 };
 
-import * as React from "react";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import * as React from 'react';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-const options = ["Complete", "Deny"];
+const options = ['Complete', 'Deny'];
 
 const ITEM_HEIGHT = 48;
 
@@ -178,13 +178,13 @@ export default function LongMenu(request) {
   const handleClose = async (e) => {
     let status = e.target.innerHTML;
     var realStatus =
-      status == "Complete"
-        ? "Completed"
-        : status == "Deny"
-        ? "Denied"
-        : "Warning";
+      status == 'Complete'
+        ? 'Completed'
+        : status == 'Deny'
+        ? 'Denied'
+        : 'Warning';
 
-    if (typeof window != "undefined") {
+    if (typeof window != 'undefined') {
       await axios
         .put(`http://localhost:4000/api/request/update/${request.requestId}`, {
           status: realStatus,
@@ -201,8 +201,8 @@ export default function LongMenu(request) {
       <IconButton
         aria-label="more"
         id="long-button"
-        aria-controls={open ? "long-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
+        aria-controls={open ? 'long-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -211,7 +211,7 @@ export default function LongMenu(request) {
       <Menu
         id="long-menu"
         MenuListProps={{
-          "aria-labelledby": "long-button",
+          'aria-labelledby': 'long-button',
         }}
         anchorEl={anchorEl}
         open={open}
@@ -219,14 +219,14 @@ export default function LongMenu(request) {
         PaperProps={{
           style: {
             maxHeight: ITEM_HEIGHT * 4.5,
-            width: "20ch",
+            width: '20ch',
           },
         }}
       >
         {options.map((option) => (
           <MenuItem
             key={option}
-            selected={option === "Pyxis"}
+            selected={option === 'Pyxis'}
             onClick={handleClose}
           >
             {option}
