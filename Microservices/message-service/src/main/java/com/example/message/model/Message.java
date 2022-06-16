@@ -37,4 +37,7 @@ public class Message {
 
     @Enumerated(EnumType.STRING)
     private MessageStatus messageStatus;
+
+    @Column(name = "sender_full_name")
+    private String senderFullName;
 }

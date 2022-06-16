@@ -57,6 +57,11 @@ public class MessageController {
         return messageService.createMessage(message);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Message> patchMessageById(@PathVariable long id, @RequestBody MessageStatus status){
+        log.info("MessageController - patchMessageById");
+        return messageService.patchMessageById(id, status);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Message> getMessageById(@PathVariable long id){
